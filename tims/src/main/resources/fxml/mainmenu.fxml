@@ -1,21 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
-<?import javafx.scene.chart.LineChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
-      xmlns="http://javafx.com/javafx/10.0.2-internal"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.jabanto.tims.controller.MainMenuControler">
-<LineChart prefHeight="600" fx:id="chart">
-    <xAxis>
-        <CategoryAxis label="Time"/>
-    </xAxis>
-    <yAxis>
-        <NumberAxis label="Price" />
-    </yAxis>
-</LineChart>
-</Pane>
+<BorderPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@/styles/styles.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jabanto.tims.controller.MainMenuController">
 
+    <top>
+        <HBox alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="600.0" spacing="10" styleClass="hbo-general">
+         <children>
+            <TextField fx:id="loginNameField" promptText="User name" styleClass="general-btn" />
+            <TextField fx:id="loginPasswordField" promptText="User password" styleClass="general-btn" />
+             <Button fx:id="loginButton" styleClass="general-btn" text="Log in">
+                 <HBox.margin>
+                     <Insets right="10" />
+                 </HBox.margin>
+             </Button>
+         </children>
+
+        </HBox>
+    </top>
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
+
+          <fx:include source="main_centralbuttons.fxml"/>
+
+            <HBox alignment="CENTER_RIGHT" layoutY="31.0" prefHeight="100.0" prefWidth="600.0">
+                   <!-- Boton izquierdo -->
+                <Button fx:id="reportsButton" prefHeight="70.0" prefWidth="80.0" styleClass="pentagon-btn" text="Reports">
+                   <HBox.margin>
+                       <Insets left="10" top="10" />
+                   </HBox.margin>
+                </Button>
+               <!-- Espacio flexibl para separar los botones -->
+               <Region HBox.hgrow="ALWAYS" />
+               <!--Boton derecho -->
+               <Button fx:id="backupButton" prefHeight="70.0" prefWidth="80.0" styleClass="pentagon-btn" text="Back up">
+                   <HBox.margin>
+                       <Insets right="10" top="10" />
+                   </HBox.margin>
+               </Button>
+            </HBox>
+            <GridPane alignment="CENTER" prefWidth="600.0">
+            <rowConstraints>
+               <RowConstraints minHeight="10.0" prefHeight="48.0" />
+               <RowConstraints minHeight="10.0" prefHeight="48.0" />
+               <RowConstraints minHeight="10.0" prefHeight="48.0" />
+            </rowConstraints>
+            <columnConstraints>
+               <ColumnConstraints halignment="CENTER" minWidth="10.0" prefWidth="100.0" />
+               <ColumnConstraints halignment="CENTER" minWidth="10.0" prefWidth="100.0" />
+               <ColumnConstraints halignment="CENTER" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+                <children>
+                    <Button prefHeight="70.0" prefWidth="80.0" styleClass="hexagon-button" text="Back up" GridPane.columnIndex="1" />
+
+                    <Button prefHeight="70.0" prefWidth="80.0" styleClass="hexagon-button" text="Back up" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                    <Button prefHeight="70.0" prefWidth="80.0" styleClass="hexagon-button" text="Back up" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+
+                    <Button prefHeight="70.0" prefWidth="80.0" styleClass="hexagon-button" text="Back up" GridPane.rowIndex="1" />
+                </children>
+            </GridPane>
+
+      </VBox>
+   </center>
+
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="600.0" spacing="10" styleClass="hbo-general">
+            <children>
+                <Label layoutX="20" styleClass="label-bottom" text="PIMS">
+                    <HBox.margin>
+                        <Insets left="10" />
+                    </HBox.margin>
+                </Label>
+                <Region HBox.hgrow="ALWAYS" />
+                <Label fx:id="dateField" styleClass="label-bottom" text="Date ">
+                    <HBox.margin>
+                        <Insets right="10" />
+                    </HBox.margin>
+                </Label>
+            </children>
+        </HBox>
+    </bottom>
+</BorderPane>
