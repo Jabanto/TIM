@@ -27,14 +27,15 @@
 
             <HBox alignment="CENTER_RIGHT" style="first-row" VBox.vgrow="NEVER">
                    <!-- Boton izquierdo -->
-                <Button fx:id="reportsButton" prefHeight="70.0" prefWidth="80.0" styleClass="hexagon-btn" text="Reports" >
+                <Button fx:id="reports_btn" prefHeight="70.0" prefWidth="80.0" styleClass="hexagon-btn" text="Reports" >
                    <HBox.margin>
                        <Insets left="10" />
                    </HBox.margin>
                 </Button>
                <!-- Espacio flexible para separar los botones -->
                <Region HBox.hgrow="ALWAYS" />
-                <Polygon fill="WHITE" styleClass="central_btn">
+               <StackPane>
+                <Polygon styleClass="central_btn">
                     <points>
                         <Double fx:value="20.0" />
                         <Double fx:value="0.0" />
@@ -50,9 +51,12 @@
                         <Double fx:value="40.0" />
                     </points>
                 </Polygon>
+               <Label text="JAVANTO" textFill="darkslateblue" style="-fx-font-weight: bold;"/>
+               </StackPane>
+                <!-- Espacio flexible para separar los botones -->
                 <Region HBox.hgrow="ALWAYS" />
                <!--Boton derecho -->
-               <Button fx:id="backupButton" prefHeight="70.0" prefWidth="80.0" styleClass="hexagon-btn" text="Back up">
+               <Button fx:id="backup_btn" prefHeight="70.0" prefWidth="80.0" styleClass="hexagon-btn" text="Back up">
                    <HBox.margin>
                        <Insets right="10"/>
                    </HBox.margin>
@@ -60,14 +64,14 @@
             </HBox>
 
             <fx:include source="main_centralbuttons.fxml" VBox.vgrow="ALWAYS" />
-         <Label text="Label" prefHeight="70.0"  VBox.vgrow="NEVER" styleClass="labelPersonalized"/>
+         <Label alignment="CENTER" text="Tool Inventory Management System" prefHeight="70.0"  VBox.vgrow="NEVER" styleClass="labelPersonalized"/>
       </VBox>
    </center>
 
     <bottom>
         <HBox alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="600.0" spacing="10" styleClass="hbo-general">
             <children>
-                <Label layoutX="20" styleClass="label-bottom" text="PIMS">
+                <Label layoutX="20" styleClass="label-bottom" text="TIMS">
                     <HBox.margin>
                         <Insets left="10" />
                     </HBox.margin>

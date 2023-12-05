@@ -8,6 +8,7 @@
     -fx-font-size: 12px;
     -fx-padding: 5px 10px;
     -fx-pref-width: 80;
+    -fx-font-weight: bold; /* Grosor del texto */
 }
 
 .hexagon-btn:hover {
@@ -23,6 +24,11 @@
     -fx-text-fill: white;
 }
 
+.label-poligon_btn {
+     -fx-font-size: 14px; /* Tamaño del texto */
+     -fx-text-fill: white; /* Color del texto */
+     -fx-font-weight: bold; /* Grosor del texto */
+}
 .general-btn{
     -fx-min-width: 120px;
     -fx-max-width: 120px;
@@ -36,7 +42,7 @@
 }
 
 .central_btn{
-    -fx-fill: #ffffff ;
+    -fx-fill: WHITE;
     -fx-stroke: #2980b9; /* Color del borde */
     -fx-stroke-width: 2; /* Ancho del borde */
 }
