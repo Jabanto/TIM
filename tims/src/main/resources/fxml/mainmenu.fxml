@@ -2,7 +2,6 @@
 
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
@@ -24,48 +23,44 @@
         </HBox>
     </top>
    <center>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" BorderPane.alignment="CENTER" spacing="2">
 
-          <fx:include source="main_centralbuttons.fxml"/>
-
-            <HBox alignment="CENTER_RIGHT" layoutY="31.0" prefHeight="100.0" prefWidth="600.0">
+            <HBox alignment="CENTER_RIGHT" style="first-row" VBox.vgrow="NEVER">
                    <!-- Boton izquierdo -->
-                <Button fx:id="reportsButton" prefHeight="70.0" prefWidth="80.0" styleClass="pentagon-btn" text="Reports">
+                <Button fx:id="reportsButton" prefHeight="70.0" prefWidth="80.0" styleClass="hexagon-btn" text="Reports" >
                    <HBox.margin>
-                       <Insets left="10" top="10" />
+                       <Insets left="10" />
                    </HBox.margin>
                 </Button>
-               <!-- Espacio flexibl para separar los botones -->
+               <!-- Espacio flexible para separar los botones -->
                <Region HBox.hgrow="ALWAYS" />
+                <Polygon fill="WHITE" styleClass="central_btn">
+                    <points>
+                        <Double fx:value="20.0" />
+                        <Double fx:value="0.0" />
+                        <Double fx:value="60.0" />
+                        <Double fx:value="0.0" />
+                        <Double fx:value="80.0" />
+                        <Double fx:value="40.0" />
+                        <Double fx:value="60.0" />
+                        <Double fx:value="80.0" />
+                        <Double fx:value="20.0" />
+                        <Double fx:value="80.0" />
+                        <Double fx:value="0.0" />
+                        <Double fx:value="40.0" />
+                    </points>
+                </Polygon>
+                <Region HBox.hgrow="ALWAYS" />
                <!--Boton derecho -->
-               <Button fx:id="backupButton" prefHeight="70.0" prefWidth="80.0" styleClass="pentagon-btn" text="Back up">
+               <Button fx:id="backupButton" prefHeight="70.0" prefWidth="80.0" styleClass="hexagon-btn" text="Back up">
                    <HBox.margin>
-                       <Insets right="10" top="10" />
+                       <Insets right="10"/>
                    </HBox.margin>
                </Button>
             </HBox>
-            <GridPane alignment="CENTER" prefWidth="600.0">
-            <rowConstraints>
-               <RowConstraints minHeight="10.0" prefHeight="48.0" />
-               <RowConstraints minHeight="10.0" prefHeight="48.0" />
-               <RowConstraints minHeight="10.0" prefHeight="48.0" />
-            </rowConstraints>
-            <columnConstraints>
-               <ColumnConstraints halignment="CENTER" minWidth="10.0" prefWidth="100.0" />
-               <ColumnConstraints halignment="CENTER" minWidth="10.0" prefWidth="100.0" />
-               <ColumnConstraints halignment="CENTER" minWidth="10.0" prefWidth="100.0" />
-            </columnConstraints>
-                <children>
-                    <Button prefHeight="70.0" prefWidth="80.0" styleClass="hexagon-button" text="Back up" GridPane.columnIndex="1" />
 
-                    <Button prefHeight="70.0" prefWidth="80.0" styleClass="hexagon-button" text="Back up" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-
-                    <Button prefHeight="70.0" prefWidth="80.0" styleClass="hexagon-button" text="Back up" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-
-                    <Button prefHeight="70.0" prefWidth="80.0" styleClass="hexagon-button" text="Back up" GridPane.rowIndex="1" />
-                </children>
-            </GridPane>
-
+            <fx:include source="main_centralbuttons.fxml" VBox.vgrow="ALWAYS" />
+         <Label text="Label" prefHeight="70.0"  VBox.vgrow="NEVER" styleClass="labelPersonalized"/>
       </VBox>
    </center>
 

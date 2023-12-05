@@ -1,19 +1,22 @@
-.pentagon-btn {
-    -fx-shape: "M 0,-55 45.77,-14.37 28.17,41.21 -28.17,41.21 -45.77,-14.37 Z";
+/* Codigo para convertir un boton en un hexagono usando css */
+.hexagon-btn {
+     -fx-shape: "M 50 0 L 150 0 L 200 75 L 150 150 L 50 150 L 0 75 Z";
     -fx-background-color: #0077cc;
+    -fx-border-color: #2980b9; /* Color del borde */
+    -fx-border-width: 2; /* Ancho del borde */
     -fx-text-fill: white;
     -fx-font-size: 12px;
     -fx-padding: 5px 10px;
     -fx-pref-width: 80;
 }
 
-.pentagon-btn:hover {
+.hexagon-btn:hover {
     -fx-background-color: #005699; /* Cambia el color cuando el cursor pasa sobre el botón */
 }
 
 .hbo-general {
     -fx-background-color: #0077cc; /* Código de color para azul oscuro */
-    -fx-padding:  7 0 7 0; /* Margen, patron es arriba derecha abajo izquierda */
+    -fx-padding: 5px 10px;
 }
 
 .label-bottom {
@@ -27,27 +30,30 @@
     -fx-max-height: 48px;
 }
 
-/* styles.css */
-.hexagon-button {
-          -fx-shape: "M 50 0 L 150 0 L 200 75 L 150 150 L 50 150 L 0 75 Z";
-          -fx-background-color: #3498db; /* Color de relleno */
-          -fx-border-color: #2980b9; /* Color del borde */
-          -fx-border-width: 2; /* Ancho del borde */
-          -fx-background-insets: 0; /* Margen interior para dar espacio al contenido */
-          -fx-padding: 5; /* Margen exterior */
+.first-row{
+       -fx-min-height: 50px;
+       -fx-max-height: 50px;
 }
 
-.hexagon-button:hover {
-    -fx-background-color: #005699; /* Cambia el color cuando el cursor pasa sobre el botón */
+.central_btn{
+    -fx-fill: #ffffff ;
+    -fx-stroke: #2980b9; /* Color del borde */
+    -fx-stroke-width: 2; /* Ancho del borde */
 }
 
-.box-cruz {
-    -fx-spacing: 10; /* Espaciado entre botones */
-    -fx-alignment: center; /* Alineación al centro */
+.labelPersonalized {
+    -fx-font-size: 24px; /* Tamaño del texto */
+    -fx-text-fill: #005699; /* Color del texto */
+    -fx-font-weight: bold; /* Grosor del texto */
 }
+
+/* Codigo para definir propiedades de un poligonon usando css */
 
 .poligon_hexagon {
-    -fx-fill: #1f93ff ;
+    -fx-fill: #0077cc ;
+    -fx-stroke: #2980b9; /* Color del borde */
+    -fx-stroke-width: 2; /* Ancho del borde */
+    -fx-padding: 5px 10px;
 }
 
 .poligon_hexagon:hover{
