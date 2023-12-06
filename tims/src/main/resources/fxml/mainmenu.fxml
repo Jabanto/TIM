@@ -15,7 +15,7 @@
             fx:controller="com.jabanto.tims.controller.MainMenuController">
 
     <top>
-        <HBox alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="600.0" spacing="10" styleClass="hbo-general">
+        <HBox alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="700.0" spacing="10" styleClass="hbo-general">
          <children>
             <TextField fx:id="loginNameField" promptText="User name" styleClass="general-btn" />
             <TextField fx:id="loginPasswordField" promptText="User password" styleClass="general-btn" />

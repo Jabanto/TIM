@@ -7,21 +7,22 @@
 
 <BorderPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@/styles/styles.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jabanto.tims.controller.ToolsViewController">
     <top>
-        <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="600.0" spacing="10" styleClass="hbo-general">
+        <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="700.0" spacing="10" styleClass="hbo-general">
             <children>
                 <Label styleClass="label-title-view" text="Tool Management Interface" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font></Label>
+                   <font>
+                      <Font size="18.0" />
+                   </font>
+                </Label>
             </children>
         </HBox>
     </top>
     <center>
-            <SplitPane dividerPositions="0.4" prefHeight="300" prefWidth="250.0">
+            <SplitPane dividerPositions="0.3" prefHeight="300" prefWidth="220.0">
               <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="240.0" prefWidth="270.0">
+                <AnchorPane prefHeight="220.0" prefWidth="220.0">
                <children>
-                  <TabPane prefHeight="300.0" prefWidth="240.0" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane prefHeight="300.0" prefWidth="220.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
                       <Tab styleClass="label-general" text="Tool Check-out">
                         <content>
@@ -74,12 +75,15 @@
                   </TabPane>
                </children>
                 </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="240.0" prefWidth="270.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="220.0" prefWidth="280.0">
                <children>
-                  <TableView prefHeight="148.0" prefWidth="250.0">
+                  <TableView prefHeight="148.0" prefWidth="450.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn prefWidth="75.0" text="Tool Name" />
+                      <TableColumn prefWidth="75.0" text="Assign to" />
+                        <TableColumn prefWidth="75.0" text="Dispense from" />
+                        <TableColumn prefWidth="75.0" text="Check-out Date" />
+                        <TableColumn prefWidth="75.0" text="Check-in Date" />
                     </columns>
                   </TableView>
                </children></AnchorPane>

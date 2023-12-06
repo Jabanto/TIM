@@ -44,7 +44,7 @@
 }
 
 .label-general {
-     -fx-font-size: 14px; /* Tamaño del texto */
+     -fx-font-size: 10px; /* Tamaño del texto */
      -fx-text-fill: white; /* Color del texto */
      -fx-font-weight: bold; /* Grosor del texto */
 }
