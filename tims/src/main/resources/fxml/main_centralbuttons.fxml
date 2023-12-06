@@ -12,7 +12,7 @@
         <children>
             <StackPane fx:id="users_btn" layoutY="43">
 
-            <Polygon styleClass="poligon_hexagon">
+            <Polygon styleClass="poligon-hexagon">
                 <points>
                     <Double fx:value="20.0" />
                     <Double fx:value="0.0" />
@@ -28,11 +28,11 @@
                     <Double fx:value="40.0" />
                 </points>
             </Polygon>
-                <Label styleClass="label-poligon_btn" text="USERS" />
+                <Label styleClass="label-poligon-btn" text="USERS" />
             </StackPane>
 
             <StackPane fx:id="tools_btn" layoutX="65">
-                <Polygon styleClass="poligon_hexagon">
+                <Polygon styleClass="poligon-hexagon">
                     <points>
                         <Double fx:value="20.0" />
                         <Double fx:value="0.0" />
@@ -53,10 +53,10 @@
                <Image url="@../icons/support.png" />
             </image>
             </ImageView>
-                <Label styleClass="label-poligon_btn" text="TOOLS" />
+                <Label styleClass="label-poligon-btn" text="TOOLS" />
             </StackPane>
             <StackPane fx:id="keys_btn" layoutX="65" layoutY="87">
-            <Polygon styleClass="poligon_hexagon">
+            <Polygon styleClass="poligon-hexagon">
                 <points>
                     <Double fx:value="20.0" />
                     <Double fx:value="0.0" />
@@ -76,10 +76,10 @@
             <image>
                <Image url="@../icons/key.png" />
             </image></ImageView>
-                <Label styleClass="label-poligon_btn" text="KEY'S" />
+                <Label styleClass="label-poligon-btn" text="KEY'S" />
             </StackPane>
             <StackPane fx:id="items_btn" layoutX="130" layoutY="45">
-            <Polygon stroke="BLACK" strokeType="INSIDE" styleClass="poligon_hexagon">
+            <Polygon stroke="BLACK" strokeType="INSIDE" styleClass="poligon-hexagon">
                 <points>
                     <Double fx:value="20.0" />
                     <Double fx:value="0.0" />
@@ -95,7 +95,7 @@
                     <Double fx:value="40.0" />
                 </points>
             </Polygon>
-                <Label styleClass="label-poligon_btn" text="ITEMS" />
+                <Label styleClass="label-poligon-btn" text="ITEMS" />
             </StackPane>
         </children>
 </Group>

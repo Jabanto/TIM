@@ -2,14 +2,16 @@ package com.jabanto.tims.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Component
 public class MainMenuController {
@@ -23,6 +25,7 @@ public class MainMenuController {
     public StackPane keys_btn;
     public Button reports_btn;
     public Button backup_btn;
+    public Label current_date_label;
 
     @Value("${spring.application.ui.user-btn-description}")
     private String user_btn_description;
@@ -37,9 +40,6 @@ public class MainMenuController {
     @Value("${spring.application.ui.backup-btn-description}")
     private String backup_btn_description;
 
-    // Help elements to manage the elemetnos on the fxml files
-    private List<Button>  buttons = new ArrayList<>();
-
     /**
      * In this method i can call all me define elements on my fxml file
      * and set properties as well cann i create new elements and set these
@@ -50,6 +50,20 @@ public class MainMenuController {
     @FXML
     public void initialize(){
         setButtonsDescriptions();
+        setLocalTime_Date();
+    }
+
+    private void setLocalTime_Date() {
+        // Hole das aktuelle Datum und die aktuelle Uhrzeit
+        LocalDateTime now = LocalDateTime.now();
+
+        // Formatiere das Datum und die Uhrzeit im gewünschten Format
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd.MM.yy");
+        String formattedDateTime = now.format(formatter);
+
+        // Setze den Text des Labels
+        //current_date_label.getText();
+
     }
 
     private void setButtonsDescriptions(){
@@ -67,7 +81,8 @@ public class MainMenuController {
         Tooltip.install(tools_btn,tooltipTools);
         Tooltip.install(backup_btn,tooltipBackup);
         Tooltip.install(reports_btn,tooltipReports);
-    }
 
+
+    }
 
 }

@@ -7,7 +7,13 @@
     -fx-text-fill: white;
     -fx-font-size: 12px;
     -fx-padding: 5px 10px;
-    -fx-pref-width: 80;
+    -fx-pref-width: 80px;
+    -fx-font-weight: bold; /* Grosor del texto */
+}
+
+.check-btn {
+    -fx-background-color: orange;
+    -fx-font-size: 12px;
     -fx-font-weight: bold; /* Grosor del texto */
 }
 
@@ -24,45 +30,53 @@
     -fx-text-fill: white;
 }
 
-.label-poligon_btn {
+.label-poligon-btn {
      -fx-font-size: 14px; /* Tamaño del texto */
      -fx-text-fill: white; /* Color del texto */
      -fx-font-weight: bold; /* Grosor del texto */
 }
-.general-btn{
+
+.general-btn {
     -fx-min-width: 120px;
     -fx-max-width: 120px;
     -fx-min-height: 48px;
     -fx-max-height: 48px;
 }
 
-.first-row{
-       -fx-min-height: 50px;
-       -fx-max-height: 50px;
+.label-general {
+     -fx-font-size: 14px; /* Tamaño del texto */
+     -fx-text-fill: white; /* Color del texto */
+     -fx-font-weight: bold; /* Grosor del texto */
 }
 
-.central_btn{
-    -fx-fill: WHITE;
+.central-btn {
+    -fx-fill: white;
     -fx-stroke: #2980b9; /* Color del borde */
     -fx-stroke-width: 2; /* Ancho del borde */
 }
 
-.labelPersonalized {
-    -fx-font-size: 24px; /* Tamaño del texto */
-    -fx-text-fill: #005699; /* Color del texto */
-    -fx-font-weight: bold; /* Grosor del texto */
+.label-title-view {
+     -fx-font-size: 20px; /* Tamaño del texto */
+     -fx-text-fill: white; /* Color del texto */
+     -fx-font-weight: bold; /* Grosor del texto */
+}
+
+.label-personalized {
+     -fx-font-size: 24px; /* Tamaño del texto */
+     -fx-text-fill: #005699; /* Color del texto */
+     -fx-font-weight: bold; /* Grosor del texto */
 }
 
 /* Codigo para definir propiedades de un poligonon usando css */
 
-.poligon_hexagon {
+.poligon-hexagon {
     -fx-fill: #0077cc ;
     -fx-stroke: #2980b9; /* Color del borde */
     -fx-stroke-width: 2; /* Ancho del borde */
     -fx-padding: 5px 10px;
 }
 
-.poligon_hexagon:hover{
+.poligon-hexagon:hover {
     -fx-fill: #005699; /* Cambia el color cuando el cursor pasa sobre el botón */
 }
 

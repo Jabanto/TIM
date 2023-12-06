@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="300"
+            prefWidth="300.0" stylesheets="@/styles/styles.css"
+            xmlns="http://javafx.com/javafx/10.0.2-internal"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.jabanto.tims.controller.LoginController">
+
+    <top >
+        <VBox alignment="CENTER">
+        <Label prefHeight="60.0" styleClass="label-personalized" text="Login Menu"  />
+        </VBox>
+    </top>
+    <center>
+        <VBox alignment="CENTER" prefHeight="62.0" prefWidth="300.0" spacing="10" styleClass="hbo-general">
+            <children>
+                <TextField fx:id="loginNameField" promptText="User name" styleClass="general-btn" />
+                <TextField fx:id="loginPasswordField" promptText="User password" styleClass="general-btn" />
+                <Button fx:id="loginButton" styleClass="general-btn" text="Log in">
+                    <HBox.margin>
+                        <Insets right="10" />
+                    </HBox.margin>
+                </Button>
+            </children>
+
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="300.0" spacing="10" styleClass="hbo-general">
+            <children>
+                <Label layoutX="20" styleClass="label-bottom" text="TIMS by Javanto">
+                    <HBox.margin>
+                        <Insets left="10" />
+                    </HBox.margin>
+                </Label>
+                <Region HBox.hgrow="ALWAYS" />
+                <Label fx:id="current_date_label" text="Date and Time" styleClass="label-bottom" >
+                    <HBox.margin>
+                        <Insets right="10" />
+                    </HBox.margin>
+                </Label>
+            </children>
+        </HBox>
+    </bottom>
+</BorderPane>
+

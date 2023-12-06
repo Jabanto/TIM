@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@/styles/styles.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jabanto.tims.controller.ToolsViewController">
+    <top>
+        <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="600.0" spacing="10" styleClass="hbo-general">
+            <children>
+                <Label styleClass="label-title-view" text="Tool Management Interface" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            </children>
+        </HBox>
+    </top>
+    <center>
+            <SplitPane dividerPositions="0.4" prefHeight="300" prefWidth="250.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="240.0" prefWidth="270.0">
+               <children>
+                  <TabPane prefHeight="300.0" prefWidth="240.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab styleClass="label-general" text="Tool Check-out">
+                        <content>
+                            <VBox prefHeight="270.0" prefWidth="200" spacing="7">
+                                <children>
+                                    <Label prefHeight="17.0" prefWidth="170.0" text="Tool Identification Nr" />
+                                    <ComboBox prefWidth="180.0" promptText="Select Group" />
+                                    <ComboBox prefWidth="180.0" promptText="Select Tool" />
+                                    <ComboBox editable="true" prefWidth="180.0" promptText="Select User" />
+                                    <DatePicker prefWidth="180.0" promptText="Select Chekout Date" />
+                                    <HBox prefHeight="100.0" prefWidth="200" spacing="10.0">
+                                       <children>
+                                          <Button prefWidth="85" text="Reset" />
+                                          <Region HBox.hgrow="ALWAYS" />
+                                          <Button prefWidth="85" styleClass="check-btn" text="Check-out" />
+                                       </children>
+                                        <padding>
+                                            <Insets right="52" />
+                                        </padding>
+                                    </HBox>
+                                </children>
+                                 <padding>
+                                    <Insets left="7.0" top="7.0" />
+                                 </padding>
+                            </VBox>
+                        </content>
+                      </Tab>
+                      <Tab styleClass="label-general" text="Tool Check-in">
+                        <content>
+                            <VBox prefHeight="271.0" prefWidth="180" spacing="7">
+                                <children>
+                                    <Label prefHeight="17.0" prefWidth="170.0" text="Tool Identification Nr" />
+                                    <TextField editable="false" prefWidth="150.0" promptText="Group" />
+                                    <TextField editable="false" prefWidth="120.0" promptText="Tool Name" />
+                                    <TextField editable="false" prefWidth="170.0" promptText="Checkout Date" />
+                                    <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                        <children>
+                                            <Button prefWidth="85" text="Delete Entry" />
+                                            <Button prefWidth="85" styleClass="check-btn" text="Check-in" />
+                                        </children>
+                                    </HBox>
+                                </children>
+                                <padding>
+                                    <Insets left="7.0" right="10" top="7.0" />
+                                </padding>
+                            </VBox>
+                        </content>
+                      </Tab>
+                    </tabs>
+                  </TabPane>
+               </children>
+                </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="240.0" prefWidth="270.0">
+               <children>
+                  <TableView prefHeight="148.0" prefWidth="250.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                  </TableView>
+               </children></AnchorPane>
+              </items>
+            </SplitPane>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="600.0" spacing="10" styleClass="hbo-general">
+            <children>
+                <Label layoutX="20" styleClass="label-bottom" text="TIMS by Javanto">
+                    <HBox.margin>
+                        <Insets left="10" />
+                    </HBox.margin>
+                </Label>
+                <Region HBox.hgrow="ALWAYS" />
+                <Label fx:id="current_date_label" styleClass="label-bottom" text="Date">
+                    <HBox.margin>
+                        <Insets right="10" />
+                    </HBox.margin>
+                </Label>
+            </children>
+        </HBox>
+    </bottom>
+</BorderPane>
