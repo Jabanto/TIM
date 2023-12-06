@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.geometry.Insets?>
 <BorderPane fx:id="mainPanel" maxHeight="-Infinity"
             maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity" prefHeight="400.0"
             prefWidth="700.0" stylesheets="@/styles/styles.css"
             xmlns="http://javafx.com/javafx/10.0.2-internal"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.jabanto.tims.controller.itemsViewController">
+            fx:controller="com.jabanto.tims.controller.UsersViewController">
     <top>
         <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="700.0" spacing="10" styleClass="hbo-general">
             <children>
-                <Label styleClass="label-title-view" text="Items Management Interface" textFill="WHITE">
+                <Label styleClass="label-title-view" text="User Management Interface" textFill="WHITE">
                 </Label>
             </children>
         </HBox>
@@ -25,18 +25,21 @@
                     <children>
                         <TabPane prefHeight="300.0" prefWidth="220.0" tabClosingPolicy="UNAVAILABLE">
                             <tabs>
-                                <Tab styleClass="label-general" text="Item Creation">
+                                <Tab styleClass="label-general" text="User Creation">
                                     <content>
                                         <VBox prefHeight="270.0" prefWidth="200" spacing="7">
                                             <children>
-                                                <Label prefHeight="17.0" prefWidth="170.0" text="Introduce properties" />
-                                                <ComboBox prefWidth="180.0" promptText="Select Category" />
-                                                <TextField prefWidth="180.0" promptText="New Item Name" />
-                                                <ComboBox editable="true" prefWidth="180.0" promptText="Select Group" />
+                                                <Label prefHeight="17.0" prefWidth="170.0" text="Introduce Information" />
+                                                <TextField prefWidth="180.0" promptText="User Name" />
+                                                <TextField prefWidth="180.0" promptText="User Last Name" />
+                                                <TextField prefWidth="180.0" promptText="Email" />
+                                                <ComboBox prefWidth="180.0" promptText="Select Group" />
+                                                <ComboBox prefWidth="180.0" promptText="Select Role" />
+                                                <PasswordField prefWidth="180.0" promptText="Insert Password" />
                                                 <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200" spacing="10.0">
                                                     <children>
                                                         <Button prefWidth="85" text="Reset" />
-                                                        <Button prefWidth="85" styleClass="check-btn" text="Create Item" />
+                                                        <Button prefWidth="85" styleClass="check-btn" text="Create User" />
                                                     </children>
                                                 </HBox>
                                             </children>
@@ -55,14 +58,14 @@
                         <TableView prefHeight="148.0" prefWidth="450.0">
                             <columns>
                                 <TableColumn prefWidth="75.0" text="ID" />
-                                <TableColumn prefWidth="75.0" text="Item name" />
-                                <TableColumn prefWidth="75.0" text="Category" />
+                                <TableColumn prefWidth="75.0" text="Name" />
+                                <TableColumn prefWidth="75.0" text="Lastname" />
                                 <TableColumn prefWidth="75.0" text="Group" />
-                                <TableColumn prefWidth="75.0" text="Status" />
-                                <TableColumn prefWidth="75.0" text="Remark" />
+                                <TableColumn prefWidth="75.0" text="Role" />
                             </columns>
                         </TableView>
-                    </children></AnchorPane>
+                    </children>
+                </AnchorPane>
             </items>
         </SplitPane>
     </center>
