@@ -7,19 +7,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<BorderPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity" prefHeight="400.0"
-            prefWidth="600.0" stylesheets="@/styles/styles.css"
-            xmlns="http://javafx.com/javafx/10.0.2-internal"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.jabanto.tims.controller.MainMenuController">
-
+<BorderPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@/styles/styles.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jabanto.tims.controller.MainMenuController">
     <top>
         <HBox alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="700.0" spacing="10" styleClass="hbo-general">
          <children>
             <TextField fx:id="loginNameField" promptText="User name" styleClass="general-btn" />
-            <TextField fx:id="loginPasswordField" promptText="User password" styleClass="general-btn" />
-             <Button fx:id="loginButton" styleClass="general-btn" text="Log in">
+            <PasswordField fx:id="loginPasswordField" promptText="User password" styleClass="general-btn" />
+             <Button fx:id="loginButton" onAction="#initiateLogin" styleClass="general-btn" text="Log in">
                  <HBox.margin>
                      <Insets right="10" />
                  </HBox.margin>
@@ -75,17 +69,16 @@
          <Label alignment="CENTER" prefHeight="70.0" styleClass="label-personalized" text="Tool Inventory Management System" VBox.vgrow="NEVER" />
       </VBox>
    </center>
-
     <bottom>
         <HBox alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="600.0" spacing="10" styleClass="hbo-general">
             <children>
-                <Label layoutX="20" styleClass="label-bottom" text="TIMS by Javanto">
+                <Label styleClass="label-bottom" text="TIMS by Javanto">
                     <HBox.margin>
                         <Insets left="10" />
                     </HBox.margin>
                 </Label>
                 <Region HBox.hgrow="ALWAYS" />
-                <Label fx:id="current_date_label" text="Date and Time" styleClass="label-bottom" >
+                <Label fx:id="current_date_label" >
                     <HBox.margin>
                         <Insets right="10" />
                     </HBox.margin>

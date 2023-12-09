@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import org.springframework.stereotype.Component;
 
 @Component
-public class itemsViewController {
+public class ItemsViewController {
 
     @FXML
     public void initialize(){

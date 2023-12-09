@@ -30,7 +30,7 @@
                                         <VBox prefHeight="270.0" prefWidth="200" spacing="7">
                                             <children>
                                                 <Label prefHeight="17.0" prefWidth="170.0" text="Introduce Information" />
-                                                <TextField prefWidth="180.0" promptText="User Name" />
+                                                <TextField fx:id="user_name_btn" prefWidth="180.0" promptText="User Name" />
                                                 <TextField prefWidth="180.0" promptText="User Last Name" />
                                                 <TextField prefWidth="180.0" promptText="Email" />
                                                 <ComboBox prefWidth="180.0" promptText="Select Group" />
