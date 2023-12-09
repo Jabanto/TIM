@@ -33,7 +33,7 @@
                 <Label styleClass="label-poligon-btn" text="USERS" />
             </StackPane>
 
-            <StackPane fx:id="tools_btn" layoutX="65">
+            <StackPane fx:id="tools_btn" layoutX="65" onMouseClicked="#openToolsMenu">
                 <Polygon styleClass="poligon-hexagon">
                     <points>
                         <Double fx:value="20.0" />
@@ -57,7 +57,7 @@
             </ImageView>
                 <Label styleClass="label-poligon-btn" text="TOOLS" />
             </StackPane>
-            <StackPane fx:id="keys_btn" layoutX="65" layoutY="87">
+            <StackPane fx:id="keys_btn" layoutX="65" layoutY="87" onMouseClicked="#openKeysMenu">
             <Polygon styleClass="poligon-hexagon">
                 <points>
                     <Double fx:value="20.0" />
@@ -74,13 +74,14 @@
                     <Double fx:value="40.0" />
                 </points>
             </Polygon>
-         <ImageView pickOnBounds="true" preserveRatio="true">
+            <ImageView pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@../icons/key.png" />
-            </image></ImageView>
+            </image>
+            </ImageView>
                 <Label styleClass="label-poligon-btn" text="KEY'S" />
             </StackPane>
-            <StackPane fx:id="items_btn" layoutX="130" layoutY="45">
+            <StackPane fx:id="items_btn" layoutX="130" layoutY="45" onMouseClicked="#openItemsMenu">
             <Polygon stroke="BLACK" strokeType="INSIDE" styleClass="poligon-hexagon">
                 <points>
                     <Double fx:value="20.0" />

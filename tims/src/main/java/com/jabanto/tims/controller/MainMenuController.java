@@ -9,9 +9,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-import static javafx.scene.control.Alert.*;
+import static javafx.scene.control.Alert.AlertType.*;
+import static javafx.scene.control.Alert.AlertType.CONFIRMATION;
 
 @Component
 public class MainMenuController {
@@ -45,6 +46,17 @@ public class MainMenuController {
 
     @Value("classpath:/fxml/users_view.fxml")
     private Resource usersViewResource;
+    @Value("classpath:/fxml/items_view.fxml")
+    private Resource itemsViewResource;
+    @Value("classpath:/fxml/reports_view.fxml")
+    private Resource reportsViewResource;
+    @Value("classpath:/fxml/tools_view.fxml")
+    private Resource toolsViewResource;
+    @Value("classpath:/fxml/backup_view.fxml")
+    private Resource backupViewResource;
+    @Value("classpath:/fxml/keys_view.fxml")
+    private Resource keysViewResource;
+
     @Value("${spring.application.ui.user-btn-description}")
     private String user_btn_description;
     @Value("${spring.application.ui.tools-btn-description}")
@@ -94,7 +106,6 @@ public class MainMenuController {
         String currentTime = dateFormat.format(new Date());
         //TODO Find why elementos are include in bottom no charge on the controller and are null
         //current_date_label.setText("Current Time: " + currentTime);
-
     }
 
     private void setLocalTime_Date() {
@@ -130,20 +141,85 @@ public class MainMenuController {
     @FXML
     public void openUserMenu(MouseEvent mouseEvent) throws IOException {
         if (mouseEvent.getEventType().equals(MouseEvent.MOUSE_CLICKED)){
-            fxmlLoader.changeWindow(usersViewResource);
+
+            if(USERLOGGED){
+                fxmlLoader.changeWindow(usersViewResource);
+            }else {
+                generateAlert("ACCESS RESTRICTION: Only logged User can open this view: check or log in", WARNING);
+            }
         }
+    }
+
+    @FXML
+    public void openItemsMenu(MouseEvent mouseEvent) throws IOException {
+        if (mouseEvent.getEventType().equals(MouseEvent.MOUSE_CLICKED)){
+
+            if(USERLOGGED){
+                fxmlLoader.changeWindow(itemsViewResource);
+            }else {
+                generateAlert("ACCESS RESTRICTION: Only logged User can open this view: check or log in", WARNING);
+            }
+        }
+    }
+
+    @FXML
+    public void openToolsMenu(MouseEvent mouseEvent) throws IOException {
+        if (mouseEvent.getEventType().equals(MouseEvent.MOUSE_CLICKED)){
+            if(USERLOGGED){
+                fxmlLoader.changeWindow(toolsViewResource);
+            }else {
+                generateAlert("ACCESS RESTRICTION: Only logged User can open this view: check or log in", WARNING);
+            }
+        }
+    }
+
+    @FXML
+    public void openReportsMenu(MouseEvent mouseEvent) throws IOException {
+        if (mouseEvent.getEventType().equals(MouseEvent.MOUSE_CLICKED)){
+            if(USERLOGGED){
+                fxmlLoader.changeWindow(reportsViewResource);
+            }else {
+                generateAlert("ACCESS RESTRICTION: Only logged User can open this view: check or log in", WARNING);
+            }
+        }
+    }
+
+    @FXML
+    public void openBackupMenu(MouseEvent mouseEvent) throws IOException {
+        if (mouseEvent.getEventType().equals(MouseEvent.MOUSE_CLICKED)){
+            if(USERLOGGED){
+                fxmlLoader.changeWindow(backupViewResource);
+            }else {
+                generateAlert("ACCESS RESTRICTION: Only logged User can open this view: check or log in", WARNING);
+            }
+        }
+    }
+
+    @FXML
+    public void openKeysMenu(MouseEvent mouseEvent) throws IOException {
+        if (mouseEvent.getEventType().equals(MouseEvent.MOUSE_CLICKED)){
+            if(USERLOGGED){
+                fxmlLoader.changeWindow(keysViewResource);
+            }else {
+                generateAlert("ACCESS RESTRICTION: Only logged User can open this view: check or log in", WARNING);
+            }
+        }
+    }
+
+
+    private void generateAlert(String headerText, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setHeaderText(headerText);
+        alert.showAndWait();
     }
 
     @FXML
     public void initiateLogin(ActionEvent actionEvent) {
 
-        if (actionEvent.getSource().equals(loginButton)){
+        if (actionEvent.getSource().equals(loginButton)&&!loginButton.getText().equals("Logout")){
 
             if (loginNameField.getText().isEmpty() && loginPasswordField.getText().isEmpty()){
-                Alert alert = new Alert(AlertType.WARNING);
-                alert.setHeaderText("LOGIN ERROR");
-                alert.setHeaderText("Invalid Data Access: check Password or Name");
-                alert.showAndWait();
+                generateAlert("LOGIN ERROR : Invalid Data Access: check Password or Name",WARNING);
             }else {
                 String userName = loginNameField.getText();
                 String password = loginPasswordField.getText();
@@ -151,16 +227,32 @@ public class MainMenuController {
 
                 if (state!=-1){
                     if (state ==1){
-                        Alert alert = new Alert(AlertType.CONFIRMATION);
-                        alert.setHeaderText("Login success, features are activate");
-                        alert.show();
+                        generateAlert("Login success, features are activate", CONFIRMATION);
+                        loginNameField.setText("");
+                        loginPasswordField.setText("");
+                        loginPasswordField.setDisable(true);
+                        loginNameField.setDisable(true);
+                        loginButton.setText("Logout");
                         USERLOGGED=true;
-                    }else {
-                        Alert alert = new Alert(AlertType.WARNING);
-                        alert.setHeaderText("Invalid Data Access: check Password or Name");
-                        alert.showAndWait();
                     }
+                }else {
+                    generateAlert("Invalid Data Access: check Password or Name",WARNING);
                 }
+            }
+        }else {
+            loginPasswordField.setDisable(false);
+            loginNameField.setDisable(false);
+            loginButton.setText("Log in");
+            USERLOGGED=false;
+        }
+    }
+
+    @FXML
+    public void eventKey(KeyEvent keyEvent) {
+        Object evt = keyEvent.getSource();
+        if (evt.equals(loginNameField) || evt.equals(loginPasswordField)) {
+            if (keyEvent.getCharacter().equals(" ")) {
+                keyEvent.consume();
             }
         }
     }

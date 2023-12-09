@@ -9,33 +9,32 @@
 
 <BorderPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@/styles/styles.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jabanto.tims.controller.MainMenuController">
     <top>
-        <HBox alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="700.0" spacing="10" styleClass="hbo-general">
+        <HBox alignment="CENTER_RIGHT" prefHeight="62.0" spacing="10" styleClass="hbo-general">
          <children>
-            <TextField fx:id="loginNameField" promptText="User name" styleClass="general-btn" />
-            <PasswordField fx:id="loginPasswordField" promptText="User password" styleClass="general-btn" />
+            <TextField fx:id="loginNameField" promptText="User name" styleClass="general-btn" onKeyTyped="#eventKey" />
+            <PasswordField fx:id="loginPasswordField" promptText="User password" styleClass="general-btn" onKeyTyped="#eventKey" />
              <Button fx:id="loginButton" onAction="#initiateLogin" styleClass="general-btn" text="Log in">
                  <HBox.margin>
                      <Insets right="10" />
                  </HBox.margin>
              </Button>
          </children>
-
         </HBox>
     </top>
-   <center>
-      <VBox alignment="CENTER" spacing="2" BorderPane.alignment="CENTER">
+    <center>
+        <VBox alignment="CENTER" spacing="2" BorderPane.alignment="CENTER">
 
             <HBox alignment="CENTER_RIGHT" style="first-row" VBox.vgrow="NEVER">
                    <!-- Boton izquierdo -->
-                <Button fx:id="reports_btn" prefHeight="70.0" prefWidth="80.0" styleClass="hexagon-btn" text="Reports">
+                <Button fx:id="reports_btn" prefHeight="70.0" prefWidth="80.0" styleClass="hexagon-btn" text="Reports" onMouseClicked="#openReportsMenu">
                    <HBox.margin>
                        <Insets left="10" />
                    </HBox.margin>
                 </Button>
                <!-- Espacio flexible para separar los botones -->
-               <Region HBox.hgrow="ALWAYS" />
-               <StackPane>
-                <Polygon styleClass="central-btn">
+                <Region HBox.hgrow="ALWAYS" />
+                <StackPane>
+                 <Polygon styleClass="central-btn">
                     <points>
                         <Double fx:value="20.0" />
                         <Double fx:value="0.0" />
@@ -50,27 +49,27 @@
                         <Double fx:value="0.0" />
                         <Double fx:value="40.0" />
                     </points>
-                </Polygon>
-               <ImageView fitHeight="152.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../icons/iconoHotJaba.png" />
-                  </image></ImageView>
-               </StackPane>
+                 </Polygon>
+                 <ImageView fitHeight="152.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../icons/iconoHotJaba.png" />
+                    </image></ImageView>
+                </StackPane>
                 <!-- Espacio flexible para separar los botones -->
                 <Region HBox.hgrow="ALWAYS" />
-               <!--Boton derecho -->
-               <Button fx:id="backup_btn" prefHeight="70.0" prefWidth="80.0" styleClass="hexagon-btn" text="Back up">
+                <!--Boton derecho -->
+                <Button fx:id="backup_btn" prefHeight="70.0" prefWidth="80.0" styleClass="hexagon-btn" text="Back up" onMouseClicked="#openBackupMenu">
                    <HBox.margin>
                        <Insets right="10" />
                    </HBox.margin>
-               </Button>
-            </HBox>
-            <fx:include source="main_centralbuttons.fxml" VBox.vgrow="ALWAYS" />
-         <Label alignment="CENTER" prefHeight="70.0" styleClass="label-personalized" text="Tool Inventory Management System" VBox.vgrow="NEVER" />
-      </VBox>
-   </center>
+                </Button>
+             </HBox>
+             <fx:include source="main_centralbuttons.fxml" VBox.vgrow="ALWAYS" />
+             <Label alignment="CENTER" prefHeight="70.0" styleClass="label-personalized" text="Tool Inventory Management System" VBox.vgrow="NEVER" />
+        </VBox>
+    </center>
     <bottom>
-        <HBox alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="600.0" spacing="10" styleClass="hbo-general">
+        <HBox alignment="CENTER_RIGHT" prefHeight="62.0" spacing="10" styleClass="hbo-general">
             <children>
                 <Label styleClass="label-bottom" text="TIMS by Javanto">
                     <HBox.margin>
@@ -78,7 +77,7 @@
                     </HBox.margin>
                 </Label>
                 <Region HBox.hgrow="ALWAYS" />
-                <Label fx:id="current_date_label" >
+                <Label fx:id="current_date_label" text="Current Time" styleClass="label-bottom">
                     <HBox.margin>
                         <Insets right="10" />
                     </HBox.margin>
