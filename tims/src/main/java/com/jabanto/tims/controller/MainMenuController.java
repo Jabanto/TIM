@@ -1,7 +1,7 @@
 package com.jabanto.tims.controller;
 
 import com.jabanto.tims.configuration.SpringFxmlLoader;
-import com.jabanto.tims.dao.config.entities.UserDAO;
+import com.jabanto.tims.dao.config.models.UserDAO;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -242,6 +242,7 @@ public class MainMenuController {
         }else {
             loginPasswordField.setDisable(false);
             loginNameField.setDisable(false);
+            //TODO set button to Log when another view is open and closet again , check controllers
             loginButton.setText("Log in");
             USERLOGGED=false;
         }
