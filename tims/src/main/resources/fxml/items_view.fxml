@@ -46,6 +46,28 @@
                                         </VBox>
                                     </content>
                                 </Tab>
+                                <Tab styleClass="label-general" text="Manage Item">
+                                    <content>
+                                        <VBox prefHeight="270.0" prefWidth="200" spacing="7">
+                                            <children>
+                                                <Label prefHeight="17.0" prefWidth="170.0" text="Select Item :" />
+                                                <TextField prefWidth="180.0" promptText="Item Name" />
+                                                <ComboBox prefWidth="180.0" promptText="Category" />
+                                                <ComboBox prefWidth="180.0" promptText="Group" />
+                                                <ComboBox prefWidth="180" promptText="Status" />
+                                                <TextArea prefWidth="180" prefHeight="70" promptText="Remark" />
+                                                <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200" spacing="10.0">
+                                                    <children>
+                                                        <Button prefWidth="85" styleClass="check-btn" text="Update" />
+                                                    </children>
+                                                </HBox>
+                                            </children>
+                                            <padding>
+                                                <Insets left="7.0" top="7.0" right="32" />
+                                            </padding>
+                                        </VBox>
+                                    </content>
+                                </Tab>
                             </tabs>
                         </TabPane>
                     </children>

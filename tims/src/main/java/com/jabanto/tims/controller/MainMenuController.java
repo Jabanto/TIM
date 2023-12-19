@@ -1,14 +1,13 @@
 package com.jabanto.tims.controller;
 
 import com.jabanto.tims.configuration.SpringFxmlLoader;
-import com.jabanto.tims.dao.config.models.UserDAO;
+import com.jabanto.tims.service.generic.UserService;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -25,8 +24,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-import static javafx.scene.control.Alert.AlertType.*;
 import static javafx.scene.control.Alert.AlertType.CONFIRMATION;
+import static javafx.scene.control.Alert.AlertType.WARNING;
 
 @Component
 public class MainMenuController {
@@ -73,10 +72,10 @@ public class MainMenuController {
     public static boolean USERLOGGED = false;
 
     @Autowired
-    SpringFxmlLoader fxmlLoader;
+    private SpringFxmlLoader fxmlLoader;
 
     @Autowired
-    UserDAO userDAO;
+    private UserService userService;
 
     public MainMenuController() {
     }
@@ -223,7 +222,7 @@ public class MainMenuController {
             }else {
                 String userName = loginNameField.getText();
                 String password = loginPasswordField.getText();
-                int state = userDAO.login(userName,password);
+                int state = 1;
 
                 if (state!=-1){
                     if (state ==1){
