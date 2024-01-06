@@ -6,16 +6,19 @@ import javax.persistence.*;
 public class UserGroup {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "group_sequence", sequenceName = "group_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "group_sequence")
     private int Id;
-    private String group_name;
+
+    @Column(name = "group_name")
+    private String groupName;
 
 
     public UserGroup() {
     }
 
-    public UserGroup(String group_name) {
-        this.group_name = group_name;
+    public UserGroup(String groupName) {
+        this.groupName = groupName;
     }
 
     public int getId() {
@@ -26,18 +29,18 @@ public class UserGroup {
         Id = id;
     }
 
-    public String getGroup_name() {
-        return group_name;
+    public String getGroupName() {
+        return groupName;
     }
 
-    public void setGroup_name(String group_name) {
-        this.group_name = group_name;
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
     @Override
     public String toString() {
         return "UserGroup{" +
                 "Id=" + Id +
-                ", group_name='" + group_name + '\'' +
+                ", group_name='" + groupName + '\'' +
                 '}';
     }
 }

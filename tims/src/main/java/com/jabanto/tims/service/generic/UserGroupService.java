@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserGroupService {
@@ -16,4 +18,16 @@ public class UserGroupService {
 
     public List<UserGroup> readUserGroup(){ return userGroupRepository.findAll();}
 
+    public List<String> getGroupNames(){
+
+        List<UserGroup> roleList =  readUserGroup();
+        List<String> nameGroup = roleList.stream()
+                .map(UserGroup::getGroupName)
+                .collect(Collectors.toList());
+        return nameGroup;
+    }
+
+    public Optional<UserGroup> getGroup(String groupName) {
+        return userGroupRepository.findByGroupName(groupName);
+    }
 }

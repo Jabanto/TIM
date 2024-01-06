@@ -11,6 +11,13 @@
     -fx-font-weight: bold; /* Grosor del texto */
 }
 
+.userTableView {
+    -fx-anchor-pane-top: 0.0;
+    -fx-anchor-pane-bottom: 0.0;
+    -fx-anchor-pane-left: 0.0;
+    -fx-anchor-pane-right: 0.0;
+}
+
 .check-btn {
     -fx-background-color: orange;
     -fx-font-size: 12px;

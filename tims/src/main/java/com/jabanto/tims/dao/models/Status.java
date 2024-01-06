@@ -1,8 +1,4 @@
 package com.jabanto.tims.dao.models;
-
-
-import com.sun.javafx.beans.IDProperty;
-
 import javax.persistence.*;
 
 @Entity(name = "status")

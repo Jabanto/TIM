@@ -11,7 +11,7 @@
     <top>
         <HBox alignment="CENTER_RIGHT" prefHeight="62.0" spacing="10" styleClass="hbo-general">
          <children>
-            <TextField fx:id="loginNameField" promptText="User name" styleClass="general-btn" onKeyTyped="#eventKey" />
+            <TextField fx:id="loginNameField" promptText="User Email" styleClass="general-btn" onKeyTyped="#eventKey" />
             <PasswordField fx:id="loginPasswordField" promptText="User password" styleClass="general-btn" onKeyTyped="#eventKey" />
              <Button fx:id="loginButton" onAction="#initiateLogin" styleClass="general-btn" text="Log in">
                  <HBox.margin>

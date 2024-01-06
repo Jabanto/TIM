@@ -1,6 +1,4 @@
 package com.jabanto.tims.dao.models;
-
-
 import javax.persistence.*;
 import java.util.Date;
 

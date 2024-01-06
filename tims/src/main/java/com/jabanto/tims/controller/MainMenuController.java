@@ -1,6 +1,11 @@
 package com.jabanto.tims.controller;
 
 import com.jabanto.tims.configuration.SpringFxmlLoader;
+import com.jabanto.tims.dao.models.User;
+import com.jabanto.tims.dao.models.UserGroup;
+import com.jabanto.tims.dao.models.UserRole;
+import com.jabanto.tims.service.generic.UserGroupService;
+import com.jabanto.tims.service.generic.UserRoleService;
 import com.jabanto.tims.service.generic.UserService;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -13,16 +18,20 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
+import org.aspectj.weaver.ast.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
+import javax.swing.text.TabExpander;
+import javax.swing.text.View;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Optional;
 
 import static javafx.scene.control.Alert.AlertType.CONFIRMATION;
 import static javafx.scene.control.Alert.AlertType.WARNING;
@@ -77,6 +86,12 @@ public class MainMenuController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserGroupService userGroupService;
+
+    @Autowired
+    private UserRoleService userRoleService;
+
     public MainMenuController() {
     }
 
@@ -92,7 +107,6 @@ public class MainMenuController {
     public void initialize(){
         setButtonsDescriptions();
         setLocalTime_Date();
-
         Timeline timeline = new Timeline(new KeyFrame(Duration.minutes(1), event -> updateTime()));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
@@ -144,7 +158,7 @@ public class MainMenuController {
             if(USERLOGGED){
                 fxmlLoader.changeWindow(usersViewResource);
             }else {
-                generateAlert("ACCESS RESTRICTION: Only logged User can open this view: check or log in", WARNING);
+                ViewControllerUtils.generateAlert("ACCESS RESTRICTION: Only logged User can open this view: check or log in", WARNING);
             }
         }
     }
@@ -156,7 +170,7 @@ public class MainMenuController {
             if(USERLOGGED){
                 fxmlLoader.changeWindow(itemsViewResource);
             }else {
-                generateAlert("ACCESS RESTRICTION: Only logged User can open this view: check or log in", WARNING);
+               ViewControllerUtils.generateAlert("ACCESS RESTRICTION: Only logged User can open this view: check or log in", WARNING);
             }
         }
     }
@@ -167,7 +181,7 @@ public class MainMenuController {
             if(USERLOGGED){
                 fxmlLoader.changeWindow(toolsViewResource);
             }else {
-                generateAlert("ACCESS RESTRICTION: Only logged User can open this view: check or log in", WARNING);
+               ViewControllerUtils.generateAlert("ACCESS RESTRICTION: Only logged User can open this view: check or log in", WARNING);
             }
         }
     }
@@ -175,10 +189,10 @@ public class MainMenuController {
     @FXML
     public void openReportsMenu(MouseEvent mouseEvent) throws IOException {
         if (mouseEvent.getEventType().equals(MouseEvent.MOUSE_CLICKED)){
+            ViewControllerUtils.generateAlert("ACCESS RESTRICTION: Only logged User can open this view: check or log in", WARNING);
             if(USERLOGGED){
                 fxmlLoader.changeWindow(reportsViewResource);
             }else {
-                generateAlert("ACCESS RESTRICTION: Only logged User can open this view: check or log in", WARNING);
             }
         }
     }
@@ -189,7 +203,7 @@ public class MainMenuController {
             if(USERLOGGED){
                 fxmlLoader.changeWindow(backupViewResource);
             }else {
-                generateAlert("ACCESS RESTRICTION: Only logged User can open this view: check or log in", WARNING);
+               ViewControllerUtils.generateAlert("ACCESS RESTRICTION: Only logged User can open this view: check or log in", WARNING);
             }
         }
     }
@@ -200,16 +214,9 @@ public class MainMenuController {
             if(USERLOGGED){
                 fxmlLoader.changeWindow(keysViewResource);
             }else {
-                generateAlert("ACCESS RESTRICTION: Only logged User can open this view: check or log in", WARNING);
+                ViewControllerUtils.generateAlert("ACCESS RESTRICTION: Only logged User can open this view: check or log in", WARNING);
             }
         }
-    }
-
-
-    private void generateAlert(String headerText, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
-        alert.setHeaderText(headerText);
-        alert.showAndWait();
     }
 
     @FXML
@@ -218,15 +225,15 @@ public class MainMenuController {
         if (actionEvent.getSource().equals(loginButton)&&!loginButton.getText().equals("Logout")){
 
             if (loginNameField.getText().isEmpty() && loginPasswordField.getText().isEmpty()){
-                generateAlert("LOGIN ERROR : Invalid Data Access: check Password or Name",WARNING);
+                ViewControllerUtils.generateAlert ("LOGIN ERROR : Invalid Data Access: check Password or Email",WARNING);
             }else {
                 String userName = loginNameField.getText();
                 String password = loginPasswordField.getText();
-                int state = 1;
+                int state = userService.loginUser(userName,password);
 
                 if (state!=-1){
-                    if (state ==1){
-                        generateAlert("Login success, features are activate", CONFIRMATION);
+                    if (state==1){
+                        ViewControllerUtils.generateAlert("Login success, features are activate", CONFIRMATION);
                         loginNameField.setText("");
                         loginPasswordField.setText("");
                         loginPasswordField.setDisable(true);
@@ -235,7 +242,7 @@ public class MainMenuController {
                         USERLOGGED=true;
                     }
                 }else {
-                    generateAlert("Invalid Data Access: check Password or Name",WARNING);
+                    ViewControllerUtils.generateAlert("Invalid Data Access: check Password or Name",WARNING);
                 }
             }
         }else {
@@ -256,4 +263,5 @@ public class MainMenuController {
             }
         }
     }
+
 }

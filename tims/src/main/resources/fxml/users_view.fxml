@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import javafx.geometry.Insets?>
-<BorderPane fx:id="mainPanel" maxHeight="-Infinity"
-            maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity" prefHeight="400.0"
-            prefWidth="700.0" stylesheets="@/styles/styles.css"
-            xmlns="http://javafx.com/javafx/10.0.2-internal"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.jabanto.tims.controller.UsersViewController">
+<BorderPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" stylesheets="@/styles/styles.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jabanto.tims.controller.UsersViewController">
     <top>
         <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="700.0" spacing="10" styleClass="hbo-general">
             <children>
@@ -30,21 +25,45 @@
                                         <VBox prefHeight="270.0" prefWidth="200" spacing="7">
                                             <children>
                                                 <Label prefHeight="17.0" prefWidth="170.0" text="Introduce Information" />
-                                                <TextField fx:id="user_name_btn" prefWidth="180.0" promptText="User Name" />
-                                                <TextField prefWidth="180.0" promptText="User Last Name" />
-                                                <TextField prefWidth="180.0" promptText="Email" />
-                                                <ComboBox prefWidth="180.0" promptText="Select Group" />
-                                                <ComboBox prefWidth="180.0" promptText="Select Role" />
-                                                <PasswordField prefWidth="180.0" promptText="Insert Password" />
+                                                <TextField fx:id="register_firstName" prefWidth="180.0" promptText="User First Name" />
+                                                <TextField fx:id="register_lastName" prefWidth="180.0" promptText="User Last Name" />
+                                                <TextField fx:id="register_email" prefWidth="180.0" promptText="Email" />
+                                                <ComboBox fx:id="register_group_cb" prefWidth="180.0" promptText="Select Group" />
+                                                <ComboBox fx:id="register_role_cb" prefWidth="180.0" promptText="Select Role" />
+                                                <PasswordField fx:id="register_password" prefWidth="180.0" promptText="Insert Password" />
                                                 <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200" spacing="10.0">
                                                     <children>
-                                                        <Button prefWidth="85" text="Reset" />
-                                                        <Button prefWidth="85" styleClass="check-btn" text="Create User" />
+                                                        <Button fx:id="new_reset" onAction="#resetFields" prefWidth="85" text="Reset" />
+                                                        <Button fx:id="create_user" prefWidth="85" onAction="#registerUser" styleClass="check-btn" text="Create User" />
                                                     </children>
                                                 </HBox>
                                             </children>
                                             <padding>
-                                                <Insets left="7.0" top="7.0" right="32" />
+                                                <Insets left="7.0" right="32" top="7.0" />
+                                            </padding>
+                                        </VBox>
+                                    </content>
+                                </Tab>
+                                <Tab styleClass="label-general" text="Edit User Info">
+                                    <content>
+                                        <VBox prefHeight="270.0" prefWidth="200" spacing="7">
+                                            <children>
+                                                <TextField fx:id="edit_firstName" prefWidth="180.0" promptText="User First Name" />
+                                                <TextField fx:id="edit_lastName" prefWidth="180.0" promptText="User Last Name" />
+                                                <TextField fx:id="edit_email" prefWidth="180.0" promptText="Email" />
+                                                <ComboBox fx:id="edit_group_cb" prefWidth="180.0" promptText="Group" />
+                                                <ComboBox fx:id="edit_role_cb" prefWidth="180.0" promptText="Role" />
+                                                <TextField fx:id="edit_password" prefWidth="180.0" promptText="New Password" />
+                                                <ComboBox fx:id="edit_enable" prefWidth="180.0" promptText="Enable" />
+                                                <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200" spacing="10.0">
+                                                    <children>
+                                                        <Button fx:id="edit_reset" onAction="#resetFields" prefWidth="85" text="Reset" />
+                                                        <Button fx:id="edit_update_user" onAction="#updateUser" prefWidth="85" styleClass="check-btn" text="Update" />
+                                                    </children>
+                                                </HBox>
+                                            </children>
+                                            <padding>
+                                                <Insets left="7.0" right="32" top="7.0" />
                                             </padding>
                                         </VBox>
                                     </content>
@@ -55,13 +74,17 @@
                 </AnchorPane>
                 <AnchorPane prefHeight="220.0" prefWidth="280.0">
                     <children>
-                        <TableView prefHeight="148.0" prefWidth="450.0">
+                        <TableView fx:id="userTable" prefHeight="148.0" prefWidth="450.0"
+                                   AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"
+                                   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                             <columns>
-                                <TableColumn prefWidth="75.0" text="ID" />
-                                <TableColumn prefWidth="75.0" text="Name" />
-                                <TableColumn prefWidth="75.0" text="Lastname" />
-                                <TableColumn prefWidth="75.0" text="Group" />
-                                <TableColumn prefWidth="75.0" text="Role" />
+                                <TableColumn fx:id="userIdCollumn" prefWidth="25.0" text="ID" />
+                                <TableColumn fx:id="firstNameCollumn" prefWidth="75.0" text="Firstname" />
+                                <TableColumn fx:id="lastNameCollumn" prefWidth="75.0" text="Lastname" />
+                                <TableColumn fx:id="emailCollumn" prefWidth="75.0" text="Email" />
+                                <TableColumn fx:id="groupCollumn" prefWidth="75.0" text="Group" />
+                                <TableColumn fx:id="roleCollumn" prefWidth="75.0" text="Role" />
+                                <TableColumn fx:id="enableCollumn" prefWidth="75.0" text="Enable" />
                             </columns>
                         </TableView>
                     </children>
@@ -88,4 +111,3 @@
         </HBox>
     </bottom>
 </BorderPane>
-

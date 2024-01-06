@@ -6,15 +6,19 @@ import javax.persistence.*;
 public class UserRole {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "role_generator", sequenceName = "role_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "role_generator")
     private int Id;
-    private String role_name;
+
+    @Column(name = "role_name")
+    private String roleName;
 
     public UserRole() {
+
     }
 
-    public UserRole(String role_name) {
-        this.role_name = role_name;
+    public UserRole(String roleName) {
+        this.roleName = roleName;
     }
 
     public int getId() {
@@ -25,19 +29,19 @@ public class UserRole {
         Id = id;
     }
 
-    public String getRole_name() {
-        return role_name;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRole_name(String role_name) {
-        this.role_name = role_name;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     @Override
     public String toString() {
         return "UserRole{" +
                 "Id=" + Id +
-                ", role_name='" + role_name + '\'' +
+                ", role_name='" + roleName + '\'' +
                 '}';
     }
 }
