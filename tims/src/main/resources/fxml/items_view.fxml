@@ -30,9 +30,9 @@
                                         <VBox prefHeight="270.0" prefWidth="200" spacing="7">
                                             <children>
                                                 <Label prefHeight="17.0" prefWidth="170.0" text="Introduce properties" />
-                                                <ComboBox prefWidth="180.0" promptText="Select Category" />
-                                                <TextField prefWidth="180.0" promptText="New Item Name" />
-                                                <ComboBox editable="true" prefWidth="180.0" promptText="Select Group" />
+                                                <ComboBox fx:id="new_group" prefWidth="180.0" promptText="Select Group" />
+                                                <ComboBox fx:id="new_category" prefWidth="180.0" promptText="Select Category" />
+                                                <TextField fx:id="new_itemName" prefWidth="180.0" promptText="New Item Name" />
                                                 <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200" spacing="10.0">
                                                     <children>
                                                         <Button prefWidth="85" text="Reset" />
@@ -52,8 +52,8 @@
                                             <children>
                                                 <Label prefHeight="17.0" prefWidth="170.0" text="Select Item :" />
                                                 <TextField prefWidth="180.0" promptText="Item Name" />
-                                                <ComboBox prefWidth="180.0" promptText="Category" />
                                                 <ComboBox prefWidth="180.0" promptText="Group" />
+                                                <ComboBox prefWidth="180.0" promptText="Category" />
                                                 <ComboBox prefWidth="180" promptText="Status" />
                                                 <TextArea prefWidth="180" prefHeight="70" promptText="Remark" />
                                                 <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200" spacing="10.0">

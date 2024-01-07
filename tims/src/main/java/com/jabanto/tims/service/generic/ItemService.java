@@ -8,12 +8,12 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class ItemService  {
 
         @Autowired
         private ItemsRepository itemRepository;
 
-        @Transactional
         public String createItem(Item item){
             try {
                 if (!itemRepository.existsById(item.getId())){

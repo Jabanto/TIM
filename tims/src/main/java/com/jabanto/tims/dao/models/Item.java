@@ -14,25 +14,24 @@ public class Item {
     private String remark;
 
     @JoinColumn(name = "category_id")
-    @OneToOne( fetch = FetchType.EAGER , cascade = CascadeType.ALL)
+    @OneToOne( fetch = FetchType.EAGER , cascade = CascadeType.MERGE)
     private Category category;
 
-    @JoinColumn(name = "group_id")
-    @OneToOne( fetch = FetchType.EAGER , cascade = CascadeType.ALL)
-    private UserGroup userGroup;
+    @Column(name = "item_group")
+    @Enumerated(EnumType.STRING)
+    private ItemType itemType = ItemType.TOOLS;
 
     @JoinColumn(name = "status_id")
-    @OneToOne( fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne( fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     private Status status;
 
     public Item() {
     }
 
-    public Item(String itemName, String remark, Category category, UserGroup userGroup, Status status) {
+    public Item(String itemName, String remark, Category category, Status status) {
         this.itemName = itemName;
         this.remark = remark;
         this.category = category;
-        this.userGroup = userGroup;
         this.status = status;
     }
 
@@ -43,7 +42,13 @@ public class Item {
     public void setId(int id) {
         this.Id = id;
     }
+    public ItemType getItemType() {
+        return itemType;
+    }
 
+    public void setItemType(ItemType itemType) {
+        this.itemType = itemType;
+    }
     public String getItemName() {
         return itemName;
     }
@@ -68,14 +73,6 @@ public class Item {
         this.category = category;
     }
 
-    public UserGroup getUserGroup() {
-        return userGroup;
-    }
-
-    public void setUserGroup(UserGroup userGroup) {
-        this.userGroup = userGroup;
-    }
-
     public Status getStatus() {
         return status;
     }
@@ -87,9 +84,12 @@ public class Item {
     @Override
     public String toString() {
         return "Item{" +
-                "id=" + Id +
-                ", item_name='" + itemName + '\'' +
+                "Id=" + Id +
+                ", itemName='" + itemName + '\'' +
                 ", remark='" + remark + '\'' +
+                ", category=" + category +
+                ", itemType=" + itemType +
+                ", status=" + status +
                 '}';
     }
 }

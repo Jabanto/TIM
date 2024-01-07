@@ -55,7 +55,7 @@
                             <VBox prefHeight="271.0" prefWidth="180" spacing="7">
                                 <children>
                                     <Label prefHeight="17.0" prefWidth="170.0" text="Tool Identification Nr" />
-                                    <TextField editable="false" prefWidth="150.0" promptText="Group" />
+                                    <TextField editable="false" prefWidth="150.0" promptText="Category" />
                                     <TextField editable="false" prefWidth="120.0" promptText="Tool Name" />
                                     <TextField editable="false" prefWidth="170.0" promptText="Checkout Date" />
                                     <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
