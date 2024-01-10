@@ -6,7 +6,6 @@ import com.jabanto.tims.dao.models.ConfirmationToken;
 import com.jabanto.tims.dao.models.User;
 import com.jabanto.tims.dao.repositories.UserRepository;
 import com.jabanto.tims.service.registration.EmailValidatorService;
-import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,6 +17,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -54,6 +54,10 @@ public class UserService implements UserDetailsService {
     public List<User> readAllUsers(){ return userRepository.findAll();}
 
     public Optional<User> readUserById(int Id){ return userRepository.findById(Id);}
+
+    public List<User> loadUsersByRole(int roleId){
+        return userRepository.findByUserRoleId(roleId);
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -122,5 +126,23 @@ public class UserService implements UserDetailsService {
             return  DATABASE_ERROR;
         }
 
+    }
+
+    public List<String> getReceiverNames() {
+
+        List<User> receiverUsers = userRepository.findByUserRoleId(1);
+        List<String> receivers = receiverUsers.stream()
+                .map(User::getEmail)
+                .collect(Collectors.toList());
+        return receivers;
+    }
+
+    public List<String> getGiverNames() {
+
+        List<User> receiverUsers = userRepository.findByUserRole(1);
+        List<String> receivers = receiverUsers.stream()
+                .map(User::getEmail)
+                .collect(Collectors.toList());
+        return receivers;
     }
 }

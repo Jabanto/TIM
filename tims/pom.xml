@@ -63,6 +63,11 @@
 			<artifactId>javafx-fxml</artifactId>
 			<version>19</version>
 		</dependency>
+		<dependency>
+			<groupId>org.controlsfx</groupId>
+			<artifactId>controlsfx</artifactId>
+			<version>11.1.0</version> <!-- Verifica la última versión en el repositorio Maven -->
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

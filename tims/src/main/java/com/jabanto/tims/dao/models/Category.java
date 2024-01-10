@@ -10,13 +10,13 @@ public class Category {
     private int Id;
 
     @Column(name = "category_name")
-    private String Name;
+    private String name;
 
     public Category() {
     }
 
     public Category(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public int getId() {
@@ -28,18 +28,18 @@ public class Category {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     @Override
     public String toString() {
         return "Category{" +
                 "Id=" + Id +
-                ", Name='" + Name + '\'' +
+                ", Name='" + name + '\'' +
                 '}';
     }
 }

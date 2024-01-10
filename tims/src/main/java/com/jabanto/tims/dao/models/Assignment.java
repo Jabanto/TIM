@@ -9,15 +9,15 @@ public class Assignment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int Id;
 
-    @OneToOne(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER , cascade = CascadeType.MERGE)
     @JoinColumn(name = "item_id")
-    private Item itemId;
+    private Item item;
 
-    @OneToOne(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER , cascade = CascadeType.MERGE)
     @JoinColumn(name = "giver_id")
     private User giverId;
 
-    @OneToOne(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER , cascade = CascadeType.MERGE)
     @JoinColumn(name = "receiver_id")
     private User receiverId;
 
@@ -31,7 +31,7 @@ public class Assignment {
     }
 
     public Assignment(Item itemId, User giverId, User receiverId, Date checkOutDate, Date checkInDate) {
-        this.itemId = itemId;
+        this.item = itemId;
         this.giverId = giverId;
         this.receiverId = receiverId;
         this.checkOutDate = checkOutDate;
@@ -46,12 +46,12 @@ public class Assignment {
         Id = id;
     }
 
-    public Item getItemId() {
-        return itemId;
+    public Item getItem() {
+        return item;
     }
 
-    public void setItemId(Item itemId) {
-        this.itemId = itemId;
+    public void setItem(Item item) {
+        this.item = item;
     }
 
     public User getGiverId() {
@@ -90,7 +90,7 @@ public class Assignment {
     public String toString() {
         return "Assignment{" +
                 "Id=" + Id +
-                ", itemId=" + itemId +
+                ", itemId=" + item +
                 ", giverId=" + giverId +
                 ", receiverId=" + receiverId +
                 ", checkOutDate=" + checkOutDate +

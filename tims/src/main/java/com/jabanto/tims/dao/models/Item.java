@@ -1,12 +1,14 @@
 package com.jabanto.tims.dao.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "item")
 public class Item {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
     @Column(name = "item_name")
     private String itemName;
@@ -19,11 +21,14 @@ public class Item {
 
     @Column(name = "item_group")
     @Enumerated(EnumType.STRING)
-    private ItemType itemType = ItemType.TOOLS;
+    private ItemType itemType;
 
     @JoinColumn(name = "status_id")
     @OneToOne( fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     private Status status;
+
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
+    List<Assignment> assignmentsAsGiver = new ArrayList<>();
 
     public Item() {
     }

@@ -35,8 +35,8 @@
                                                 <TextField fx:id="new_itemName" prefWidth="180.0" promptText="New Item Name" />
                                                 <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200" spacing="10.0">
                                                     <children>
-                                                        <Button prefWidth="85" text="Reset" />
-                                                        <Button prefWidth="85" styleClass="check-btn" text="Create Item" />
+                                                        <Button fx:id="new_reset" onAction="#reset_itemInfo" prefWidth="85" text="Reset" />
+                                                        <Button fx:id="new_item" onAction="#createItem" prefWidth="85" styleClass="check-btn" text="Create Item" />
                                                     </children>
                                                 </HBox>
                                             </children>
@@ -51,14 +51,14 @@
                                         <VBox prefHeight="270.0" prefWidth="200" spacing="7">
                                             <children>
                                                 <Label prefHeight="17.0" prefWidth="170.0" text="Select Item :" />
-                                                <TextField prefWidth="180.0" promptText="Item Name" />
-                                                <ComboBox prefWidth="180.0" promptText="Group" />
-                                                <ComboBox prefWidth="180.0" promptText="Category" />
-                                                <ComboBox prefWidth="180" promptText="Status" />
-                                                <TextArea prefWidth="180" prefHeight="70" promptText="Remark" />
+                                                <ComboBox fx:id="edit_group" prefWidth="180.0" promptText="Group" />
+                                                <TextField fx:id="edit_name" prefWidth="180.0" promptText="Item Name" />
+                                                <ComboBox fx:id="edit_category" prefWidth="180.0" promptText="Category" />
+                                                <ComboBox fx:id="edit_status" prefWidth="180" promptText="Status" />
+                                                <TextArea fx:id="edit_remark" prefWidth="180" prefHeight="70" promptText="Remark" />
                                                 <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200" spacing="10.0">
                                                     <children>
-                                                        <Button prefWidth="85" styleClass="check-btn" text="Update" />
+                                                        <Button fx:id="edit_update_item" onAction="#updateItem" prefWidth="85" styleClass="check-btn" text="Update" />
                                                     </children>
                                                 </HBox>
                                             </children>
@@ -74,17 +74,20 @@
                 </AnchorPane>
                 <AnchorPane prefHeight="220.0" prefWidth="280.0">
                     <children>
-                        <TableView prefHeight="148.0" prefWidth="450.0">
+                        <TableView fx:id="tableItems" prefHeight="148.0" prefWidth="450.0"
+                                   AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"
+                                   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                             <columns>
-                                <TableColumn prefWidth="75.0" text="ID" />
-                                <TableColumn prefWidth="75.0" text="Item name" />
-                                <TableColumn prefWidth="75.0" text="Category" />
-                                <TableColumn prefWidth="75.0" text="Group" />
-                                <TableColumn prefWidth="75.0" text="Status" />
-                                <TableColumn prefWidth="75.0" text="Remark" />
+                                <TableColumn fx:id="itemsIDColumn" prefWidth="75.0" text="ID" />
+                                <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Item name" />
+                                <TableColumn fx:id="groupColumn" prefWidth="75.0" text="Group" />
+                                <TableColumn fx:id="categoryColumn" prefWidth="75.0" text="Category" />
+                                <TableColumn fx:id="statusColumn" prefWidth="75.0" text="Status" />
+                                <TableColumn fx:id="remarkColumn"  prefWidth="75.0" text="Remark" />
                             </columns>
                         </TableView>
-                    </children></AnchorPane>
+                    </children>
+                </AnchorPane>
             </items>
         </SplitPane>
     </center>

@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.text.Font?>
-<?import javafx.geometry.Insets?>
-<BorderPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity"
-            minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-            prefWidth="600.0" stylesheets="@/styles/styles.css"
-            xmlns="http://javafx.com/javafx/10.0.2-internal"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jabanto.tims.controller.KeysViewController">
+<BorderPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@/styles/styles.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jabanto.tims.controller.KeysViewController">
     <top>
         <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="700.0" spacing="10" styleClass="hbo-general">
             <children>
@@ -36,30 +29,27 @@
                                         <VBox prefHeight="270.0" prefWidth="200" spacing="7">
                                             <children>
                                                 <Label prefHeight="17.0" prefWidth="170.0" text="Key Identification Nr" />
-                                                <ComboBox prefWidth="180.0" promptText="Select Group" />
-                                                <ComboBox prefWidth="180.0" promptText="Select Key" />
-                                                <ComboBox editable="true" prefWidth="180.0" promptText="Select User" />
-                                                <DatePicker prefWidth="180.0" promptText="Select Chekout Date" />
+                                                <TextField fx:id="cu_Id" editable="false" prefWidth="180.0" promptText="ID" />
+                                                <ComboBox fx:id="cu_keyNane" editable="true" prefWidth="180.0" promptText="Select Key" />
+                                                <ComboBox fx:id="cu_receiverUser" editable="true" prefWidth="180.0" promptText="Select User" />
+                                                <DatePicker fx:id="cu_dateOut" editable="false" prefWidth="180.0" promptText="Select Chekout Date" />
                                                 <HBox prefHeight="100.0" prefWidth="200" spacing="10.0">
                                                     <children>
-                                                        <Button prefWidth="85" text="Reset" />
+                                                        <Button fx:id="cu_reset" prefWidth="85" text="Reset" />
                                                         <Region HBox.hgrow="ALWAYS" />
-                                                        <Button prefWidth="85" styleClass="check-btn" text="Check-out" />
+                                                        <Button fx:id="cu_checkOut" onAction="#checkOutKey" prefWidth="85" styleClass="check-btn" text="Check-out" />
                                                     </children>
-                                                    <padding>
-                                                        <Insets right="52" />
-                                                    </padding>
                                                 </HBox>
                                             </children>
                                             <padding>
-                                                <Insets left="7.0" top="7.0" />
+                                                <Insets left="7.0" right="32" top="7.0" />
                                             </padding>
                                         </VBox>
                                     </content>
                                 </Tab>
                                 <Tab styleClass="label-general" text="Key Check-in">
                                     <content>
-                                        <VBox prefHeight="271.0" prefWidth="180" spacing="7">
+                                        <VBox prefHeight="270.0" prefWidth="180" spacing="7">
                                             <children>
                                                 <Label prefHeight="17.0" prefWidth="170.0" text="Key Identification Nr" />
                                                 <TextField editable="false" prefWidth="150.0" promptText="Group" />
@@ -84,13 +74,16 @@
                 </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="220.0" prefWidth="280.0">
                     <children>
-                        <TableView prefHeight="148.0" prefWidth="450.0">
+                        <TableView fx:id="keysTable" prefHeight="148.0" prefWidth="450.0"
+                                   AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"
+                                   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                             <columns>
-                                <TableColumn prefWidth="75.0" text="Key Name" />
-                                <TableColumn prefWidth="75.0" text="Assign to" />
-                                <TableColumn prefWidth="75.0" text="Dispense from" />
-                                <TableColumn prefWidth="75.0" text="Check-out Date" />
-                                <TableColumn prefWidth="75.0" text="Check-in Date" />
+                                <TableColumn fx:id="keysIdColumn" prefWidth="25.0" text="ID" />
+                                <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Key Name" />
+                                <TableColumn fx:id="assingToColumn" prefWidth="75.0" text="Assign to" />
+                                <TableColumn fx:id="dispenseFromColumn" prefWidth="75.0" text="Dispense from" />
+                                <TableColumn fx:id="outDateColumn" prefWidth="75.0" text="Check-out Date" />
+                                <TableColumn fx:id="inDateColumn" prefWidth="75.0" text="Check-in Date" />
                             </columns>
                         </TableView>
                     </children></AnchorPane>

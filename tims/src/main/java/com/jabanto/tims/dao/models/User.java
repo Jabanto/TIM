@@ -4,8 +4,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @Entity(name = "user")
 public class User implements UserDetails {
@@ -34,6 +36,12 @@ public class User implements UserDetails {
 
     @Column(name = "enable")
     private Boolean enable = false;
+
+    @OneToMany(mappedBy = "giverId", cascade = CascadeType.ALL)
+    List<Assignment> assignmentsAsGiver = new ArrayList<>();
+
+    @OneToMany(mappedBy = "receiverId", cascade = CascadeType.ALL)
+    List<Assignment> assignmentsAsReceiver = new ArrayList<>();
 
     @Column(name = "locked")
     private Boolean locked = false;

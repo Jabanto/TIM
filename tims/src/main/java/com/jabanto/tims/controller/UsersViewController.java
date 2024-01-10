@@ -71,6 +71,8 @@ public class UsersViewController {
         configureTableSelection(userTable);
     }
 
+
+
     private void loadComboBox() {
         List<String> userRoles = userRoleService.getRolesNames();
         List<String> userGroups = userGroupService.getGroupNames();
@@ -185,7 +187,6 @@ public class UsersViewController {
             if (userExits){
                 ViewControllerUtils.generateAlert(UserService.USER_EMAIL_EXITS, WARNING);
             }else {
-
                 int result = userService.signUpUser(newUser);
                 if (result == 1) {
                     ViewControllerUtils.generateAlert(UserService.USER_CREATED, INFORMATION);
@@ -200,6 +201,7 @@ public class UsersViewController {
         }
     }
 
+    @FXML
     public void updateUser(ActionEvent actionEvent) {
 
          User updateUser = new User();

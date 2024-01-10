@@ -39,13 +39,10 @@
                                           <Region HBox.hgrow="ALWAYS" />
                                           <Button prefWidth="85" styleClass="check-btn" text="Check-out" />
                                        </children>
-                                        <padding>
-                                            <Insets right="52" />
-                                        </padding>
                                     </HBox>
                                 </children>
                                  <padding>
-                                    <Insets left="7.0" top="7.0" />
+                                     <Insets left="7.0" top="7.0" right="32" />
                                  </padding>
                             </VBox>
                         </content>
@@ -61,12 +58,13 @@
                                     <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                         <children>
                                             <Button prefWidth="85" text="Delete Entry" />
+                                            <Region HBox.hgrow="ALWAYS" />
                                             <Button prefWidth="85" styleClass="check-btn" text="Check-in" />
                                         </children>
                                     </HBox>
                                 </children>
                                 <padding>
-                                    <Insets left="7.0" right="10" top="7.0" />
+                                    <Insets left="7.0" top="7.0" right="32" />
                                 </padding>
                             </VBox>
                         </content>
@@ -77,13 +75,14 @@
                 </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="220.0" prefWidth="280.0">
                <children>
-                  <TableView prefHeight="148.0" prefWidth="450.0">
+                  <TableView fx:id="toolsTable"  prefHeight="148.0" prefWidth="450.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="Tool Name" />
-                      <TableColumn prefWidth="75.0" text="Assign to" />
-                        <TableColumn prefWidth="75.0" text="Dispense from" />
-                        <TableColumn prefWidth="75.0" text="Check-out Date" />
-                        <TableColumn prefWidth="75.0" text="Check-in Date" />
+                        <TableColumn fx:id="tooldIdColumn" prefWidth="75.0" text="ID" />
+                        <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Tool Name" />
+                        <TableColumn fx:id="assignColumn" prefWidth="75.0" text="Assign to" />
+                        <TableColumn fx:id="dispenseColumn" prefWidth="75.0" text="Dispense from" />
+                        <TableColumn fx:id="checkOutDateColumn" prefWidth="75.0" text="Check-out Date" />
+                        <TableColumn fx:id="checkInDateColumn" prefWidth="75.0" text="Check-in Date" />
                     </columns>
                   </TableView>
                </children></AnchorPane>
