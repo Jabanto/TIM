@@ -28,21 +28,19 @@
                                     <content>
                                         <VBox prefHeight="270.0" prefWidth="200" spacing="7">
                                             <children>
-                                                <Label prefHeight="17.0" prefWidth="170.0" text="Key Identification Nr" />
-                                                <TextField fx:id="cu_Id" editable="false" prefWidth="180.0" promptText="ID" />
-                                                <ComboBox fx:id="cu_keyNane" editable="true" prefWidth="180.0" promptText="Select Key" />
-                                                <ComboBox fx:id="cu_receiverUser" editable="true" prefWidth="180.0" promptText="Select User" />
-                                                <DatePicker fx:id="cu_dateOut" editable="false" prefWidth="180.0" promptText="Select Chekout Date" />
+                                                <Label prefHeight="17.0" prefWidth="170.0" text="Select a Key for Check-out:" />
+                                                <ComboBox fx:id="cu_keyNane" prefWidth="180.0" promptText="Select Key"  maxWidth="180.0"/>
+                                                <ComboBox fx:id="cu_receiverUser" editable="true" prefWidth="180.0" promptText="Select Receiver User" />
+                                                <DatePicker fx:id="cu_dateOut" editable="false" prefWidth="180.0" promptText="Select Checkout Date" />
                                                 <HBox prefHeight="100.0" prefWidth="200" spacing="10.0">
                                                     <children>
-                                                        <Button fx:id="cu_reset" prefWidth="85" text="Reset" />
                                                         <Region HBox.hgrow="ALWAYS" />
                                                         <Button fx:id="cu_checkOut" onAction="#checkOutKey" prefWidth="85" styleClass="check-btn" text="Check-out" />
                                                     </children>
                                                 </HBox>
                                             </children>
                                             <padding>
-                                                <Insets left="7.0" right="32" top="7.0" />
+                                                <Insets left="7.0" right="32.0" top="7.0" />
                                             </padding>
                                         </VBox>
                                     </content>
@@ -51,19 +49,18 @@
                                     <content>
                                         <VBox prefHeight="270.0" prefWidth="180" spacing="7">
                                             <children>
-                                                <Label prefHeight="17.0" prefWidth="170.0" text="Key Identification Nr" />
-                                                <TextField editable="false" prefWidth="150.0" promptText="Group" />
-                                                <TextField editable="false" prefWidth="120.0" promptText="Key Name" />
-                                                <TextField editable="false" prefWidth="170.0" promptText="Checkout Date" />
+                                                <Label prefHeight="17.0" prefWidth="170.0" text="Select Assignment for Check-in:" />
+                                                <TextField fx:id="ci_keyName" editable="false" prefWidth="180.0" promptText="Key Name" />
+                                                <DatePicker fx:id="ci_dateInt" editable="false" prefWidth="180.0" promptText="Check-in Date" />
                                                 <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                                     <children>
-                                                        <Button prefWidth="85" text="Delete Entry" />
-                                                        <Button prefWidth="85" styleClass="check-btn" text="Check-in" />
+                                                        <Region HBox.hgrow="ALWAYS" />
+                                                        <Button fx:id="ci_checkIn" onAction="#checkInKey" prefWidth="85.0" styleClass="check-btn" text="Check-in" />
                                                     </children>
                                                 </HBox>
                                             </children>
                                             <padding>
-                                                <Insets left="7.0" right="10" top="7.0" />
+                                                <Insets left="7.0" right="32.0" top="7.0" />
                                             </padding>
                                         </VBox>
                                     </content>

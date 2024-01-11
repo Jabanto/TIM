@@ -80,6 +80,8 @@ public class UserService implements UserDetailsService {
         return userRepository.findByEmail(email).isPresent();
     }
 
+    public Optional<User> loadUserByEmail(String email){ return userRepository.findByEmail(email); }
+
     public int signUpUser(User user){
         try{
 

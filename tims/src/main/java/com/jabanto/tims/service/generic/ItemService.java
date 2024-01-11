@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -15,13 +16,14 @@ import java.util.stream.Collectors;
 @Transactional
 public class ItemService  {
 
-    private static final int USER_UPDATE_SUCCESS = 1;
     @Autowired
     private ItemsRepository itemRepository;
 
     public static final int ITEM_CREATED_SUCCESS = 1;
     public static final int ITEM_ALREADY_EXISTS = 2;
     public static final int DATABASE_ERROR =3;
+
+    private static final int ITEM_UPDATE_SUCCESS = 1;
 
     public final static String ITEM_EXITS = "User with name already exits.";
     public final static String ITEM_NAME_INVALID = "Item with name format not valid.";
@@ -45,8 +47,6 @@ public class ItemService  {
     }
 
 
-
-
     public List<Item> readItems(){
             return itemRepository.findAll();
         }
@@ -64,7 +64,7 @@ public class ItemService  {
             existingItem.setStatus(updateItem.getStatus());
             existingItem.setRemark(updateItem.getRemark());
             itemRepository.save(existingItem);
-            return USER_UPDATE_SUCCESS;
+            return ITEM_UPDATE_SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
             return  DATABASE_ERROR;
@@ -75,10 +75,23 @@ public class ItemService  {
     public List<String> getItemsNamesByGroup(ItemType groupName) {
 
         List<Item> keys = itemRepository.findByItemGroup(groupName);
+        List<Item> filteredItems = new ArrayList<>();
+
+        filteredItems = keys.stream()
+                    .filter(item -> item.getStatus().getId() == 7)
+                    .collect(Collectors.toList());
+         keys = filteredItems;
+
         List<String> itemNames = keys.stream()
                 .map(Item::getItemName)
                 .collect(Collectors.toList());
+
         return itemNames;
 
+    }
+
+    public Item getItemByName(String name){
+        Item item = itemRepository.findByItemName(name);
+        return item;
     }
 }

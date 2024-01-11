@@ -1,13 +1,16 @@
 package com.jabanto.tims.controller;
 
 import com.jabanto.tims.dao.models.Assignment;
+import com.jabanto.tims.dao.models.Item;
 import com.jabanto.tims.dao.models.ItemType;
+import com.jabanto.tims.dao.models.Status;
 import com.jabanto.tims.service.generic.AssignmentService;
 import com.jabanto.tims.service.generic.ItemService;
+import com.jabanto.tims.service.generic.ItemStatusService;
 import com.jabanto.tims.service.generic.UserService;
 import javafx.beans.binding.Bindings;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -27,13 +30,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static javafx.scene.control.Alert.AlertType.*;
+
 @Component
 public class KeysViewController {
 
     @FXML
     public TextField cu_Id;
     public ComboBox cu_keyNane;
-    public ComboBox cu_receiverUser;
+    public ComboBox<String> cu_receiverUser;
     public DatePicker cu_dateOut;
     public Button cu_reset;
     public Button cu_checkOut;
@@ -44,6 +49,16 @@ public class KeysViewController {
     public TableColumn dispenseFromColumn;
     public TableColumn outDateColumn;
     public TableColumn inDateColumn;
+    public Button ci_checkIn;
+    public TextField ci_keyName;
+    public DatePicker ci_dateInt;
+
+    private List<String> receivers =  new ArrayList<>();
+    private int checkoutItemID;
+    private int checkInAssigmentID;
+    private static final int STATUS_AVAIBLE_ID = 7 ;
+    private static final String STATUS_AVAIBLE_NAME = "Avaible";
+    private static final String STATUS_CHECKUP_NAME = "Check Out";
 
     @Autowired
     private ItemService itemService;
@@ -52,9 +67,10 @@ public class KeysViewController {
     private AssignmentService assingmentService;
 
     @Autowired
-    private UserService userService;
+    private ItemStatusService itemStatusService;
 
-    private List<String> receivers =  new ArrayList<>();
+    @Autowired
+    private UserService userService;
 
     @FXML
     public void initialize(){
@@ -62,11 +78,51 @@ public class KeysViewController {
         receivers = userService.getReceiverNames();
         loadKeysTable();
         loadComboBoxes();
-        configureComboBox();
+        configureAutoComplete();
+        configureTableSelection();
+        configureComboBoxSelection();
 
     }
 
-    private void configureComboBox() {
+    private void configureComboBoxSelection() {
+
+        // Agregar un ChangeListener al ComboBox
+        cu_keyNane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                // Aquí se ejecuta tu método cuando se selecciona un nuevo valor
+                if (newValue != null){
+                    Item currentItem = itemService.getItemByName(newValue);
+                    checkoutItemID = currentItem.getId();
+                }else {
+                    checkoutItemID = 0;
+                }
+            }
+        });
+
+    }
+
+    private void configureTableSelection() {
+        // Configurar el listener para la selección de la tabla
+        keysTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Assignment>() {
+            @Override
+            public void changed(ObservableValue<? extends Assignment> observable, Assignment oldValue, Assignment newValue) {
+
+                if (newValue != null ) {
+                    // Actualizar los datos en el TextField y ComboBox
+                    checkInAssigmentID = newValue.getId();
+                    boolean itemAvaible = newValue.getItem().getStatus().getId()== STATUS_AVAIBLE_ID;
+                    ci_keyName.setText(newValue.getItem().getItemName());
+                } else {
+                    // Limpiar los datos si no hay ninguna fila seleccionada
+                    checkInAssigmentID = 0;
+                    ci_keyName.clear();
+                }
+            }
+        });
+    }
+
+    private void configureAutoComplete() {
 
         // Configurar el listener para el TextField
         AutoCompletionBinding<String> autoCompletionBinding = TextFields.bindAutoCompletion(cu_receiverUser.getEditor(), receivers);
@@ -77,13 +133,6 @@ public class KeysViewController {
             cu_receiverUser.setValue(event.getCompletion());
         });
 
-        /*
-
-        cu_receiverUser.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
-            List<String> suggestions = filterSuggestions(receivers, newValue);
-            cu_receiverUser.setItems(FXCollections.observableArrayList(suggestions));
-        });
-        */
     }
 
     private List<String> filterSuggestions(List<String> nombres, String input) {
@@ -107,7 +156,12 @@ public class KeysViewController {
         List<Assignment> filteredAssigmentsByKey = new ArrayList<>();
 
         for (Assignment assignment : assignments) {
-            if (assignment.getItem() != null && assignment.getItem().getItemType() == ItemType.KEYS) {
+
+            boolean isKeyItem = assignment.getItem().getItemType() == ItemType.KEYS;
+            boolean isKeyAvaible = assignment.getItem().getStatus().getName().equals(STATUS_CHECKUP_NAME);
+            boolean isNotCheckIn = assignment.getCheckInDate()==null;
+
+            if (assignment.getItem() != null &&  isKeyItem && isNotCheckIn && isKeyAvaible) {
                 filteredAssigmentsByKey.add(assignment);
             }
         }
@@ -135,8 +189,10 @@ public class KeysViewController {
                     return Bindings.selectString(assingmentStringCellData.getValue().getGiverId(), "email");
                 }
             });
-            //outDateColumn.setCellValueFactory(new PropertyValueFactory<>("checkOutDate"));
-            //inDateColumn.setCellValueFactory(new PropertyValueFactory<>("checkInDate"));
+            outDateColumn.setCellValueFactory(new PropertyValueFactory<>("checkOutDate"));
+            if (item.getCheckInDate()!=null){
+                inDateColumn.setCellValueFactory(new PropertyValueFactory<>("checkInDate"));
+            }
         }
     }
 
@@ -152,7 +208,60 @@ public class KeysViewController {
             // Convierte LocalDateTime a java.util.Date
             Date checkOutDate = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
             checkOutAssigment.setCheckOutDate(checkOutDate);
+            checkOutAssigment.setGiverId(userService.loadUserByEmail(MainMenuController.USERLOGGED_NAME).get());
+            checkOutAssigment.setReceiverId(userService.loadUserByEmail(cu_receiverUser.getValue()).get());
+            checkOutAssigment.setItem(itemService.getItemById(checkoutItemID).get());
+                Item updateItem = checkOutAssigment.getItem();
+                updateItem.setStatus(itemStatusService.getStatus(STATUS_CHECKUP_NAME).get());
+            itemService.updateItem(updateItem,checkOutAssigment.getItem());
 
+            int result = assingmentService.checkOutItem(checkOutAssigment);
+            if (result == 1) {
+                keysTable.getItems().clear();
+                loadKeysTable();
+                cu_keyNane.getItems().clear();
+                cu_receiverUser.getItems().clear();
+                loadComboBoxes();
+                ViewControllerUtils.generateAlert(AssignmentService.ASSIGNMENT_CREATED, INFORMATION);
+            }else if (result == 2) {
+                ViewControllerUtils.generateAlert(AssignmentService.ASSIGMENT_DATABASE_ERROR, ERROR);
+            }
+            keysTable.getItems().clear();
+            loadKeysTable();
+
+        }
+    }
+
+    @FXML
+    public void checkInKey(ActionEvent actionEvent) {
+
+        Assignment checkInAssigment = new Assignment();
+
+        if (actionEvent.getSource().equals(ci_checkIn)&& ci_dateInt.getValue() != null) {
+
+            checkInAssigment = assingmentService.getAssignmentById(checkInAssigmentID);
+
+            LocalDate localDate = ci_dateInt.getValue();
+            LocalTime localTime = LocalTime.now();
+            LocalDateTime localDateTime = LocalDateTime.of(localDate,localTime);
+            // Convierte LocalDateTime a java.util.Date
+            Date checkInDate = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+            checkInAssigment.setCheckInDate(checkInDate);
+                Item updateItem = checkInAssigment.getItem();
+                updateItem.setStatus(itemStatusService.getStatus(STATUS_AVAIBLE_NAME).get());
+                itemService.updateItem(updateItem,checkInAssigment.getItem());
+            int result =  assingmentService.checkInItem(checkInAssigment);
+            if (result == 1) {
+                ViewControllerUtils.generateAlert(AssignmentService.ASSIGNMENT_CHECKIN_SUCCESS, INFORMATION);
+                keysTable.getItems().clear();
+                ci_dateInt.getEditor().clear();
+                loadKeysTable();
+            }else if (result == 2) {
+                ViewControllerUtils.generateAlert(AssignmentService.ASSIGNMENT_CHECKUP_ERROR, ERROR);
+            }
+
+        }else {
+            ViewControllerUtils.generateAlert("Select a Check-in Date.", WARNING);
         }
     }
 }

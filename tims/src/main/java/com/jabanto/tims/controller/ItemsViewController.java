@@ -54,6 +54,7 @@ public class ItemsViewController {
 
     @Autowired
     private ItemStatusService itemStatusService;
+
     private int updateItemId;
 
     @FXML
@@ -81,7 +82,7 @@ public class ItemsViewController {
                     edit_remark.setText(newValue.getRemark());
                 } else {
                     // Limpiar los datos si no hay ninguna fila seleccionada
-
+                    updateItemId = 0;
                     edit_name.clear();
                     edit_category.setValue("Item Category");
                     edit_remark.clear();

@@ -6,7 +6,8 @@ import java.util.Date;
 public class Assignment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "assignment_sequence", sequenceName = "assignment_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "assignment_sequence")
     private int Id;
 
     @ManyToOne(fetch = FetchType.EAGER , cascade = CascadeType.MERGE)

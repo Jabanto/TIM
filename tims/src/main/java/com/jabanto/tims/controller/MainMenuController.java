@@ -79,6 +79,7 @@ public class MainMenuController {
     private String backup_btn_description;
 
     public static boolean USERLOGGED = false;
+    public static String USERLOGGED_NAME = "";
 
     @Autowired
     private SpringFxmlLoader fxmlLoader;
@@ -240,6 +241,7 @@ public class MainMenuController {
                         loginNameField.setDisable(true);
                         loginButton.setText("Logout");
                         USERLOGGED=true;
+                        USERLOGGED_NAME=userName;
                     }
                 }else {
                     ViewControllerUtils.generateAlert("Invalid Data Access: check Password or Name",WARNING);
