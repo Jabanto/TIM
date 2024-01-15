@@ -28,16 +28,16 @@
                         <content>
                             <VBox prefHeight="270.0" prefWidth="200" spacing="7">
                                 <children>
-                                    <Label prefHeight="17.0" prefWidth="170.0" text="Tool Identification Nr" />
-                                    <ComboBox prefWidth="180.0" promptText="Select Group" />
-                                    <ComboBox prefWidth="180.0" promptText="Select Tool" />
-                                    <ComboBox editable="true" prefWidth="180.0" promptText="Select User" />
-                                    <DatePicker prefWidth="180.0" promptText="Select Chekout Date" />
+                                    <Label prefHeight="17.0" prefWidth="170.0" text="Select Category and Tool" />
+                                    <ComboBox fx:id="cu_category" prefWidth="180.0" promptText="Select Category" />
+                                    <ComboBox fx:id="cu_toolName" editable="true" prefWidth="180.0" promptText="Select Tool" />
+                                    <ComboBox fx:id="cu_receiver" editable="true" prefWidth="180.0" promptText="Select receiver user" />
+                                    <DatePicker fx:id="cu_checkOutDate" editable="false" prefWidth="180.0" promptText="Select Checkout Date" />
                                     <HBox prefHeight="100.0" prefWidth="200" spacing="10.0">
                                        <children>
                                           <Button prefWidth="85" text="Reset" />
                                           <Region HBox.hgrow="ALWAYS" />
-                                          <Button prefWidth="85" styleClass="check-btn" text="Check-out" />
+                                          <Button fx:id="cu_checkOut" onAction="#checkOutTool" prefWidth="85" styleClass="check-btn" text="Check-out" />
                                        </children>
                                     </HBox>
                                 </children>
@@ -51,15 +51,15 @@
                         <content>
                             <VBox prefHeight="271.0" prefWidth="180" spacing="7">
                                 <children>
-                                    <Label prefHeight="17.0" prefWidth="170.0" text="Tool Identification Nr" />
-                                    <TextField editable="false" prefWidth="150.0" promptText="Category" />
-                                    <TextField editable="false" prefWidth="120.0" promptText="Tool Name" />
-                                    <TextField editable="false" prefWidth="170.0" promptText="Checkout Date" />
+                                    <Label prefHeight="17.0" prefWidth="170.0" text="Select Assignment Tool :" />
+                                    <TextField fx:id="ci_category" editable="false" prefWidth="150.0" promptText="Category" />
+                                    <TextField fx:id="ci_toolName" editable="false" prefWidth="120.0" promptText="Tool Name" />
+                                    <DatePicker fx:id="ci_dateIn" editable="false" prefWidth="170.0" promptText="Checkout Date" />
                                     <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                         <children>
                                             <Button prefWidth="85" text="Delete Entry" />
                                             <Region HBox.hgrow="ALWAYS" />
-                                            <Button prefWidth="85" styleClass="check-btn" text="Check-in" />
+                                            <Button fx:id="ci_checkin" onAction="#checkInTool" prefWidth="85" styleClass="check-btn" text="Check-in" />
                                         </children>
                                     </HBox>
                                 </children>
@@ -75,9 +75,11 @@
                 </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="220.0" prefWidth="280.0">
                <children>
-                  <TableView fx:id="toolsTable"  prefHeight="148.0" prefWidth="450.0">
+                  <TableView fx:id="toolsTable"  prefHeight="148.0" prefWidth="450.0"
+                             AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"
+                             AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                     <columns>
-                        <TableColumn fx:id="tooldIdColumn" prefWidth="75.0" text="ID" />
+                        <TableColumn fx:id="assignmentIdColumn" prefWidth="75.0" text="ID" />
                         <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Tool Name" />
                         <TableColumn fx:id="assignColumn" prefWidth="75.0" text="Assign to" />
                         <TableColumn fx:id="dispenseColumn" prefWidth="75.0" text="Dispense from" />

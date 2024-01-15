@@ -111,7 +111,6 @@ public class KeysViewController {
                 if (newValue != null ) {
                     // Actualizar los datos en el TextField y ComboBox
                     checkInAssigmentID = newValue.getId();
-                    boolean itemAvaible = newValue.getItem().getStatus().getId()== STATUS_AVAIBLE_ID;
                     ci_keyName.setText(newValue.getItem().getItemName());
                 } else {
                     // Limpiar los datos si no hay ninguna fila seleccionada

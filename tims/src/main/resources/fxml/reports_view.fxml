@@ -34,15 +34,13 @@
                                     <content>
                                         <VBox prefHeight="270.0" prefWidth="200" spacing="7">
                                             <children>
-                                                <Label prefHeight="17.0" prefWidth="170.0" text="Select Item from table" />
-                                                <ComboBox prefWidth="180.0" promptText="Select Category" />
-                                                <ComboBox prefWidth="180.0" promptText="Select Group" />
-                                                <TextField editable="true" prefWidth="180.0" promptText="Insert Item Name" />
-                                                <ComboBox prefWidth="180.0" promptText="Select Time Range"/>
+                                                <Label prefHeight="17.0" prefWidth="170.0" text="Select Report to generate" />
+                                                <ComboBox fx:id="reportsSelection" prefWidth="180.0" promptText="Select Report" />
+                                                <TextArea fx:id="reportDescription" prefWidth="180" maxWidth="180" promptText="Reports Description" editable="false" wrapText="true" />
+                                                <TextField fx:id="directoryPath" onMouseClicked="#chooseDirectory" editable="false" prefWidth="180.0" promptText="Select destination folder" />
                                                 <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200" spacing="10.0">
                                                     <children>
-                                                        <Button prefWidth="85" text="Reset Data" />
-                                                        <Button prefWidth="85" styleClass="check-btn" text="Create Report" />
+                                                        <Button fx:id="reports_btn" onAction="#createReport" prefWidth="85" styleClass="check-btn" text="Create Report" />
                                                     </children>
                                                 </HBox>
                                             </children>

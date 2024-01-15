@@ -191,7 +191,7 @@ public class UsersViewController {
                 if (result == 1) {
                     ViewControllerUtils.generateAlert(UserService.USER_CREATED, INFORMATION);
                 }else if (result == 3) {
-                    ViewControllerUtils.generateAlert(UserService.USER_EMAIL_NOTVALID, WARNING);
+                    ViewControllerUtils.generateAlert(UserService.USER_EMAIL_INVALID, WARNING);
                 }else {
                     ViewControllerUtils.generateAlert(UserService.USER_DATABASE_ERROR, ERROR);
                 }

@@ -1,9 +1,7 @@
 package com.jabanto.tims.controller;
 
+import com.jabanto.tims.configuration.DataBaseConfig;
 import com.jabanto.tims.configuration.SpringFxmlLoader;
-import com.jabanto.tims.dao.models.User;
-import com.jabanto.tims.dao.models.UserGroup;
-import com.jabanto.tims.dao.models.UserRole;
 import com.jabanto.tims.service.generic.UserGroupService;
 import com.jabanto.tims.service.generic.UserRoleService;
 import com.jabanto.tims.service.generic.UserService;
@@ -17,24 +15,24 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.util.Duration;
-import org.aspectj.weaver.ast.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
-import javax.swing.text.TabExpander;
-import javax.swing.text.View;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.Optional;
 
-import static javafx.scene.control.Alert.AlertType.CONFIRMATION;
-import static javafx.scene.control.Alert.AlertType.WARNING;
+import static javafx.scene.control.Alert.AlertType.*;
 
 @Component
 public class MainMenuController {
@@ -47,10 +45,11 @@ public class MainMenuController {
     public StackPane items_btn;
     public StackPane keys_btn;
     public Button reports_btn;
-    public Button backup_btn;
-    public Button loginButton;
+    public Button backupView_btn;
+    public Button login_btn;
     public PasswordField loginPasswordField;
     public TextField loginNameField;
+    public Button backUp_btn;
 
     @Value("classpath:/fxml/users_view.fxml")
     private Resource usersViewResource;
@@ -80,6 +79,8 @@ public class MainMenuController {
 
     public static boolean USERLOGGED = false;
     public static String USERLOGGED_NAME = "";
+    private static final int BACK_UP_SUCCESS = 1;
+    private static final int BACK_UP_ERROR = 2;
 
     @Autowired
     private SpringFxmlLoader fxmlLoader;
@@ -92,6 +93,9 @@ public class MainMenuController {
 
     @Autowired
     private UserRoleService userRoleService;
+
+    @Autowired
+    private DataBaseConfig dataBaseConfig;
 
     public MainMenuController() {
     }
@@ -147,7 +151,7 @@ public class MainMenuController {
         Tooltip.install(items_btn,tooltipItems);
         Tooltip.install(keys_btn,tooltipKeys);
         Tooltip.install(tools_btn,tooltipTools);
-        Tooltip.install(backup_btn,tooltipBackup);
+        Tooltip.install(backupView_btn,tooltipBackup);
         Tooltip.install(reports_btn,tooltipReports);
     }
 
@@ -190,10 +194,10 @@ public class MainMenuController {
     @FXML
     public void openReportsMenu(MouseEvent mouseEvent) throws IOException {
         if (mouseEvent.getEventType().equals(MouseEvent.MOUSE_CLICKED)){
-            ViewControllerUtils.generateAlert("ACCESS RESTRICTION: Only logged User can open this view: check or log in", WARNING);
             if(USERLOGGED){
                 fxmlLoader.changeWindow(reportsViewResource);
             }else {
+                ViewControllerUtils.generateAlert("ACCESS RESTRICTION: Only logged User can open this view: check or log in", WARNING);
             }
         }
     }
@@ -223,7 +227,7 @@ public class MainMenuController {
     @FXML
     public void initiateLogin(ActionEvent actionEvent) {
 
-        if (actionEvent.getSource().equals(loginButton)&&!loginButton.getText().equals("Logout")){
+        if (actionEvent.getSource().equals(login_btn)&&!login_btn.getText().equals("Logout")){
 
             if (loginNameField.getText().isEmpty() && loginPasswordField.getText().isEmpty()){
                 ViewControllerUtils.generateAlert ("LOGIN ERROR : Invalid Data Access: check Password or Email",WARNING);
@@ -239,7 +243,7 @@ public class MainMenuController {
                         loginPasswordField.setText("");
                         loginPasswordField.setDisable(true);
                         loginNameField.setDisable(true);
-                        loginButton.setText("Logout");
+                        login_btn.setText("Logout");
                         USERLOGGED=true;
                         USERLOGGED_NAME=userName;
                     }
@@ -251,7 +255,7 @@ public class MainMenuController {
             loginPasswordField.setDisable(false);
             loginNameField.setDisable(false);
             //TODO set button to Log when another view is open and closet again , check controllers
-            loginButton.setText("Log in");
+            login_btn.setText("Log in");
             USERLOGGED=false;
         }
     }
@@ -266,4 +270,54 @@ public class MainMenuController {
         }
     }
 
+    @FXML
+    public void createDbBackup(ActionEvent actionEvent) {
+        if (actionEvent.getSource().equals(backUp_btn)){
+
+            backUp_btn.setOnAction(e-> showDirectoryChooser());
+
+        }
+    }
+
+    private void showDirectoryChooser() {
+        
+        File selectedFile = showFileChooser("Select Database File for backup.");
+        File selectedDirectory = showDirectoryChooser("Select folder to save Database Backup.");
+        // Aquí debes tener la lógica para copiar tu archivo a la carpeta seleccionada
+        if (selectedDirectory != null && selectedFile !=null) {
+             int result = copyFileToDirectory(selectedFile, selectedDirectory);
+             if (result==1){
+                 ViewControllerUtils.generateAlert("Backup Success. Data base copy is located in: "+selectedDirectory.getPath() , INFORMATION);
+             }else{
+         ViewControllerUtils.generateAlert("An error occurred during the backup process. Please check the logs for details", ERROR);
+             }
+        }else {
+            ViewControllerUtils.generateAlert("The backup couldn't be performed. A folder or file to copy needs to be selected.",WARNING);
+        }
+    }
+
+
+    public File showFileChooser(String title) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle(title);
+        return fileChooser.showOpenDialog(null);
+    }
+
+    public File showDirectoryChooser(String title) {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle(title);
+        return directoryChooser.showDialog(null);
+    }
+
+    private int copyFileToDirectory(File sourceFile, File targetDirectory) {
+        try {
+            Files.copy(sourceFile.toPath(), new File(targetDirectory, sourceFile.getName()).toPath(),
+                    StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("Backup File copied successfully.");
+            return BACK_UP_SUCCESS;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return BACK_UP_ERROR;
+        }
+    }
 }

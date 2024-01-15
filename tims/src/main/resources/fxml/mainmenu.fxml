@@ -13,7 +13,7 @@
          <children>
             <TextField fx:id="loginNameField" promptText="User Email" styleClass="general-btn" onKeyTyped="#eventKey" />
             <PasswordField fx:id="loginPasswordField" promptText="User password" styleClass="general-btn" onKeyTyped="#eventKey" />
-             <Button fx:id="loginButton" onAction="#initiateLogin" styleClass="general-btn" text="Log in">
+             <Button fx:id="login_btn" onAction="#initiateLogin" styleClass="general-btn" text="Log in">
                  <HBox.margin>
                      <Insets right="10" />
                  </HBox.margin>
@@ -58,7 +58,7 @@
                 <!-- Espacio flexible para separar los botones -->
                 <Region HBox.hgrow="ALWAYS" />
                 <!--Boton derecho -->
-                <Button fx:id="backup_btn" prefHeight="70.0" prefWidth="80.0" styleClass="hexagon-btn" text="Back up" onMouseClicked="#openBackupMenu">
+                <Button fx:id="backupView_btn" prefHeight="70.0" prefWidth="80.0" styleClass="hexagon-btn" text="Back up" onMouseClicked="#openBackupMenu">
                    <HBox.margin>
                        <Insets right="10" />
                    </HBox.margin>

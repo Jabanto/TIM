@@ -34,12 +34,13 @@ public class UserService implements UserDetailsService {
 
     private final static String USER_EMAIL_NOT_FOUND = "User with email: %s not found.";
     public final static String USER_EMAIL_EXITS = "User with email already exits.";
-    public final static String USER_EMAIL_NOTVALID = "User with email format not valid.";
+    public final static String USER_EMAIL_INVALID = "User with email format not valid.";
     public final static String USER_CREATED = "New user created.";
     public final static String USER_DATABASE_ERROR = "Error creating new user.";
 
-    private static final int USER_UPDATE_SUCCESS = 1;
+    private static final int COORDINATOR_ROLE_ID = 1;
 
+    private static final int USER_UPDATE_SUCCESS = 1;
     public static final int USER_CREATED_SUCCESS = 1;
     public static final int USER_ALREADY_EXISTS = 2;
     public static final int USER_INVALID_EMAIL = 3;
@@ -132,7 +133,7 @@ public class UserService implements UserDetailsService {
 
     public List<String> getReceiverNames() {
 
-        List<User> receiverUsers = userRepository.findByUserRoleId(1);
+        List<User> receiverUsers = userRepository.findByUserRoleId(COORDINATOR_ROLE_ID);
         List<String> receivers = receiverUsers.stream()
                 .map(User::getEmail)
                 .collect(Collectors.toList());

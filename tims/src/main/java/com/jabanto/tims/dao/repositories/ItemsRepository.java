@@ -20,11 +20,10 @@ public interface ItemsRepository extends JpaRepository<Item,Integer> {
     // Método que verifica si un nombre de item ya existe en la base de datos
     boolean existsByItemName(String itemName);
 
-    <Optional>Item findByItemName(String itemName);
+    <Optional> Item findByItemName(String itemName);
 
     @Transactional
     @Query("SELECT i FROM item i WHERE i.itemType = ?1")
     List<Item> findByItemGroup(ItemType groupName);
-
 
 }

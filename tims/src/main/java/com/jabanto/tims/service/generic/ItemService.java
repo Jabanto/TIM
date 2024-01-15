@@ -23,6 +23,7 @@ public class ItemService  {
     public static final int ITEM_ALREADY_EXISTS = 2;
     public static final int DATABASE_ERROR =3;
 
+    private static final int AVAIBLE = 7;
     private static final int ITEM_UPDATE_SUCCESS = 1;
 
     public final static String ITEM_EXITS = "User with name already exits.";
@@ -78,7 +79,7 @@ public class ItemService  {
         List<Item> filteredItems = new ArrayList<>();
 
         filteredItems = keys.stream()
-                    .filter(item -> item.getStatus().getId() == 7)
+                    .filter(item -> item.getStatus().getId() == AVAIBLE)
                     .collect(Collectors.toList());
          keys = filteredItems;
 
@@ -89,6 +90,26 @@ public class ItemService  {
         return itemNames;
 
     }
+
+    public List<String> getItemsNamesByCategory(String categoryName) {
+
+        List<Item> keys = itemRepository.findByItemGroup(ItemType.TOOLS);
+        List<Item> filteredItems = new ArrayList<>();
+
+        filteredItems = keys.stream()
+                .filter(item -> item.getStatus().getId() == AVAIBLE && item.getCategory().getName().equals(categoryName))
+                .collect(Collectors.toList());
+        keys = filteredItems;
+
+        List<String> itemNames = keys.stream()
+                .map(Item::getItemName)
+                .collect(Collectors.toList());
+
+        return itemNames;
+
+    }
+
+
 
     public Item getItemByName(String name){
         Item item = itemRepository.findByItemName(name);

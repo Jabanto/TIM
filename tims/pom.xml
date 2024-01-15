@@ -15,6 +15,7 @@
 	<description>Java Fx project for Tool Inventory Management System</description>
 	<properties>
 		<java.version>11</java.version>
+		<itext.version>8.0.2</itext.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -67,6 +68,17 @@
 			<groupId>org.controlsfx</groupId>
 			<artifactId>controlsfx</artifactId>
 			<version>11.1.0</version> <!-- Verifica la última versión en el repositorio Maven -->
+		</dependency>
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itext-core</artifactId>
+			<version>${itext.version}</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>bouncy-castle-adapter</artifactId>
+			<version>${itext.version}</version>
 		</dependency>
 	</dependencies>
 	<build>
