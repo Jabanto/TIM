@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class UserRole {
 
     @Id
-    @SequenceGenerator(name = "role_generator", sequenceName = "role_sequence", allocationSize = 1)
+    @SequenceGenerator(name = "role_generator", sequenceName = "role_sequence", allocationSize = 1, initialValue = 8)
     @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "role_generator")
     private int Id;
 

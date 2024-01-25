@@ -7,9 +7,13 @@ import java.util.List;
 @Entity(name = "item")
 public class Item {
 
+    //we change Identity to Sequence because SQL Dialect don't support identity key generation
+    //@SequenceGenerator(name = "item_sequence", sequenceName = "item_sequence", allocationSize = 1, initialValue = 15)
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_sequence")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
+
     @Column(name = "item_name")
     private String itemName;
     @Column(name = "remark")

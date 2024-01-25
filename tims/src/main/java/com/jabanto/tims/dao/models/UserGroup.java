@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class UserGroup {
 
     @Id
-    @SequenceGenerator(name = "group_sequence", sequenceName = "group_sequence", allocationSize = 1)
+    @SequenceGenerator(name = "group_sequence", sequenceName = "group_sequence", allocationSize = 1, initialValue = 8)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "group_sequence")
     private int Id;
 
