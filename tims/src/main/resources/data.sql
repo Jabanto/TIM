@@ -519,7 +519,7 @@ INSERT INTO user (
                      'Nana',
                      'Nomi',
                      0,
-                     '$2a$10$Ybb1rwbN9T/QHj/RqaOBuuBXkOUmOHC.kWdL/K/lkuvPvwSM.sGFa'
+                     '$2a$10$I0xW27Z8lOMQjgNz3tAaguMpqEfm4mKyhIMaKgCTGaebV4dSO/IEC'
                  )
 ON CONFLICT(id) DO NOTHING;
 

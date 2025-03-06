@@ -67,10 +67,12 @@ public class UserService implements UserDetailsService {
     }
 
     public int loginUser(String userName,String enteredPassword){
+        //TODO Manage worng user mail format error message should appear
         int state = -1;
         Optional<User> user = userRepository.findByEmail(userName);
         boolean userExits = user.isPresent();
         String encodedPassword = user.get().getPassword();
+
         if(passwordEncoder.bCryptPasswordEncoder().matches(enteredPassword,encodedPassword)&&userExits){
             state = 1;
         }
