@@ -3,7 +3,6 @@ package com.jabanto.tims.controller;
 import com.jabanto.tims.dao.models.Assignment;
 import com.jabanto.tims.dao.models.Item;
 import com.jabanto.tims.dao.models.ItemType;
-import com.jabanto.tims.dao.models.Status;
 import com.jabanto.tims.service.generic.AssignmentService;
 import com.jabanto.tims.service.generic.ItemService;
 import com.jabanto.tims.service.generic.ItemStatusService;
@@ -86,11 +85,11 @@ public class KeysViewController {
 
     private void configureComboBoxSelection() {
 
-        // Agregar un ChangeListener al ComboBox
+        // Add ChangeListener to ComboBox
         cu_keyNane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                // Aquí se ejecuta tu método cuando se selecciona un nuevo valor
+                //Set up the listener for new combo box selection
                 if (newValue != null){
                     Item currentItem = itemService.getItemByName(newValue);
                     checkoutItemID = currentItem.getId();
@@ -103,17 +102,17 @@ public class KeysViewController {
     }
 
     private void configureTableSelection() {
-        // Configurar el listener para la selección de la tabla
+        // Set up the listener for table selection
         keysTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Assignment>() {
             @Override
             public void changed(ObservableValue<? extends Assignment> observable, Assignment oldValue, Assignment newValue) {
 
                 if (newValue != null ) {
-                    // Actualizar los datos en el TextField y ComboBox
+                    // Update fields intro TextField y ComboBox
                     checkInAssigmentID = newValue.getId();
                     ci_keyName.setText(newValue.getItem().getItemName());
                 } else {
-                    // Limpiar los datos si no hay ninguna fila seleccionada
+                    // Reset the value if it is not an item selected
                     checkInAssigmentID = 0;
                     ci_keyName.clear();
                 }
@@ -123,10 +122,9 @@ public class KeysViewController {
 
     private void configureAutoComplete() {
 
-        // Configurar el listener para el TextField
+        // Set up the listener for TextField
         AutoCompletionBinding<String> autoCompletionBinding = TextFields.bindAutoCompletion(cu_receiverUser.getEditor(), receivers);
-
-        // Configurar el evento de selección para actualizar el valor del ComboBox
+        // Set up the selection event to update the ComboBox value
         autoCompletionBinding.setOnAutoCompleted(event -> {
             cu_receiverUser.getSelectionModel().select(event.getCompletion());
             cu_receiverUser.setValue(event.getCompletion());
@@ -135,7 +133,7 @@ public class KeysViewController {
     }
 
     private List<String> filterSuggestions(List<String> nombres, String input) {
-        // Filtrar la lista de nombres según la entrada del usuario
+        // Filter the list of names based on user input
         return nombres.stream()
                 .filter(nombre -> nombre.toLowerCase().startsWith(input.toLowerCase()))
                 .collect(Collectors.toList());
@@ -204,7 +202,7 @@ public class KeysViewController {
             LocalDate localDate = cu_dateOut.getValue();
             LocalTime localTime = LocalTime.now();
             LocalDateTime localDateTime = LocalDateTime.of(localDate,localTime);
-            // Convierte LocalDateTime a java.util.Date
+            // convert or cast LocalDateTime to java.util.Date
             Date checkOutDate = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
             checkOutAssigment.setCheckOutDate(checkOutDate);
             checkOutAssigment.setGiverId(userService.loadUserByEmail(MainMenuController.USERLOGGED_NAME).get());
@@ -243,7 +241,7 @@ public class KeysViewController {
             LocalDate localDate = ci_dateInt.getValue();
             LocalTime localTime = LocalTime.now();
             LocalDateTime localDateTime = LocalDateTime.of(localDate,localTime);
-            // Convierte LocalDateTime a java.util.Date
+            // convert or cast LocalDateTime to java.util.Date
             Date checkInDate = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
             checkInAssigment.setCheckInDate(checkInDate);
                 Item updateItem = checkInAssigment.getItem();

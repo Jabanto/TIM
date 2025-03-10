@@ -22,7 +22,7 @@ import java.io.IOException;
 @Component
 public class StageInitializer implements ApplicationListener<StageReadyEvent> {
 
-    // we use the value anotation to say spring qhere to find the fxml file
+    // we use the value anotation to say spring here to find the fxml file
     @Value("classpath:/fxml/mainmenu.fxml")
     private Resource mainMenuResource;
     private String applicationTitle;
@@ -35,13 +35,13 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
 
     @Override
     public void onApplicationEvent(StageReadyEvent event) {
-        // We want to get the Stage of the event StageReadyEvent so we cann do something with the stage here
-        // using the getSatge method the stage is ready to be setup in our user interface
+        // We want to get the Stage of the event StageReadyEvent so we can do something with the stage here
+        // using the getStage method the stage is ready to be setup in our user interface
 
         try {
 
             FXMLLoader fxmlLoader = new FXMLLoader(mainMenuResource.getURL());
-            // to make able to use the beans from the application conte in the java fx wiring
+            // to make able to use the beans from the application context in the javafx wiring
             // we use getBean Method to provide the controllers that java fx needs
             fxmlLoader.setControllerFactory(aClass -> applicationContext.getBean(aClass));
 

@@ -32,7 +32,6 @@ public class SQLiteDialectIdentityColumnSupport extends IdentityColumnSupportImp
     @Override
     public String getIdentityColumnString(int type) {
         // return "integer primary key autoincrement";
-        // FIXME "autoincrement"
         return "integer";
     }
 }

@@ -86,11 +86,11 @@ public class ToolsViewController {
 
     private void loadComboBoxSelection() {
 
-        // Agregar un ChangeListener al ComboBox
+        // Add an ChangeListener to ComboBox
         cu_category.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                // Aquí se ejecuta tu método cuando se selecciona un nuevo valor
+                // Here your method is executed when a new value is selected
                 if (newValue != null){
                     List<String> filteredItems = itemService.getItemsNamesByCategory(newValue);
                     if (filteredItems.size()>0){
@@ -103,11 +103,11 @@ public class ToolsViewController {
             }
         });
 
-        // Agregar un ChangeListener al ComboBox
+        // Add a ChangeListener to ComboBox
         cu_toolName.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                // Aquí se ejecuta tu método cuando se selecciona un nuevo valor
+                // Here your method is executed when a new value is selected
                 if (newValue != null){
                     Item currentItem = itemService.getItemByName(newValue);
                     checkoutItemID = currentItem.getId();
@@ -119,16 +119,15 @@ public class ToolsViewController {
     }
 
     private  void createAutoCompleteComboBox(ComboBox comboBox, List<String> collection){
-        // Configurar el listener para el TextField
+        // Set up the listener for TextField
         AutoCompletionBinding<String> autoCompletionBinding = TextFields.bindAutoCompletion(comboBox.getEditor(), collection);
-        // Configurar el evento de selección para actualizar el valor del ComboBox
+        // Set up the selection event to update the ComboBox value
         autoCompletionBinding.setOnAutoCompleted(event -> {
             comboBox.getSelectionModel().select(event.getCompletion());
             comboBox.setValue(event.getCompletion());
         });
 
     }
-
 
     private void loadComboBox() {
 
@@ -146,18 +145,18 @@ public class ToolsViewController {
     }
 
     private void configureTableSelection() {
-        // Configurar el listener para la selección de la tabla
+        // Set up the listener for table selection
         toolsTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Assignment>() {
             @Override
             public void changed(ObservableValue<? extends Assignment> observable, Assignment oldValue, Assignment newValue) {
 
                 if (newValue != null ) {
-                    // Actualizar los datos en el TextField y ComboBox
+                    // Update the TextField and ComboBox
                     checkInAssignmentID = newValue.getId();
                     ci_toolName.setText(newValue.getItem().getItemName());
                     ci_category.setText(newValue.getItem().getCategory().getName());
                 } else {
-                    // Limpiar los datos si no hay ninguna fila seleccionada
+                    // Clear the data if no row is selected
                     checkInAssignmentID = 0;
                     ci_toolName.clear();
                 }
@@ -225,7 +224,7 @@ public class ToolsViewController {
             LocalDate localDate = ci_dateIn.getValue();
             LocalTime localTime = LocalTime.now();
             LocalDateTime localDateTime = LocalDateTime.of(localDate,localTime);
-            // Convierte LocalDateTime a java.util.Date
+            // Change LocalDateTime to java.util.Date
             Date checkInDate = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
             checkInAssignment.setCheckInDate(checkInDate);
             Item updateItem = checkInAssignment.getItem();
@@ -256,7 +255,7 @@ public class ToolsViewController {
             LocalDate localDate = cu_checkOutDate.getValue();
             LocalTime localTime = LocalTime.now();
             LocalDateTime localDateTime = LocalDateTime.of(localDate,localTime);
-            // Convierte LocalDateTime a java.util.Date
+            // change LocalDateTime to java.util.Date
             Date checkOutDate = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
             checkOutAssignment.setCheckOutDate(checkOutDate);
             checkOutAssignment.setGiverId(userService.loadUserByEmail(MainMenuController.USERLOGGED_NAME).get());

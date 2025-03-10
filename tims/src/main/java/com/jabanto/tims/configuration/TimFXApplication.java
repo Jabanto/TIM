@@ -41,7 +41,6 @@ public class TimFXApplication extends Application {
     public void start(Stage stage){
 
         /* Lets use Spring boot features calling spring boot context
-        *
         *  we use the spring pattern of publishing events via the application context
         * to signal when the stage is ready, we give the StageReadyEvent the Stage, so that anything listening to that
         * event has access to the stage
@@ -56,7 +55,7 @@ public class TimFXApplication extends Application {
         }
 
         // here we return the Stage for that we use the method getSource that returns and object
-        // to retrun the stage we cast the method into Stage
+        // to return the stage we cast the method into Stage
         // we know already that getSource ist a Stage cuz we get before in the super constructor
         public Stage getStage() {
             return ((Stage)getSource());

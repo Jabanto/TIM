@@ -5,7 +5,6 @@ import com.jabanto.tims.configuration.SpringFxmlLoader;
 import com.jabanto.tims.service.generic.UserGroupService;
 import com.jabanto.tims.service.generic.UserRoleService;
 import com.jabanto.tims.service.generic.UserService;
-import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -28,8 +27,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import static javafx.scene.control.Alert.AlertType.*;
@@ -101,42 +98,28 @@ public class MainMenuController {
     }
 
     /**
-     * In this method i can call all me define elements on my fxml file
-     * and set properties as well cann i create new elements and set these
-     * to my fxml file , but normally i set data from another services
-     * into the elements that i have already create or defined on my
-     * fxml file
+     In this method, I can access all the elements I have defined in my FXML file.I can also set properties and even create new elements to add to the FXML file.
+     However, what I usually do is assign data from other services to the elements I have already created or defined in my FXML file.
      */
-
     @FXML
     public void initialize(){
         setButtonsDescriptions();
-        setLocalTime_Date();
-        Timeline timeline = new Timeline(new KeyFrame(Duration.minutes(1), event -> updateTime()));
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
-        // Inicializar la hora al cargar la vista
-        updateTime();
+        startClock();
     }
 
-    private void updateTime() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-        String currentTime = dateFormat.format(new Date());
-        //TODO Find why elementos are include in bottom no charge on the controller and are null
-        //current_date_label.setText("Current Time: " + currentTime);
+    private void startClock() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm dd.MM.yy");
+        // Timeline to update the time every second
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.seconds(1), event -> {
+                    String currentTime = dateFormat.format(new Date());
+                    current_date_label.setText("Current Time: " + currentTime);
+                })
+        );
+        timeline.setCycleCount(Timeline.INDEFINITE); // It runs in an infinite loop
+        timeline.play(); // Initialize the timeline
     }
 
-    private void setLocalTime_Date() {
-        // Hole das aktuelle Datum und die aktuelle Uhrzeit
-        LocalDateTime now = LocalDateTime.now();
-
-        // Formatiere das Datum und die Uhrzeit im gewünschten Format
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd.MM.yy");
-        String formattedDateTime = now.format(formatter);
-
-        // Setze den Text des Labels
-        //current_date_label.getText();
-    }
 
     private void setButtonsDescriptions(){
         // Define all text for Tooltips from  buttons to the list
@@ -254,7 +237,6 @@ public class MainMenuController {
         }else {
             loginPasswordField.setDisable(false);
             loginNameField.setDisable(false);
-            //TODO set button to Log when another view is open and closet again , check controllers
             login_btn.setText("Log in");
             USERLOGGED=false;
         }
@@ -283,7 +265,7 @@ public class MainMenuController {
         
         File selectedFile = showFileChooser("Select Database File for backup.");
         File selectedDirectory = showDirectoryChooser("Select folder to save Database Backup.");
-        // Aquí debes tener la lógica para copiar tu archivo a la carpeta seleccionada
+        // Here you should have the logic to copy your file to the selected folder
         if (selectedDirectory != null && selectedFile !=null) {
              int result = copyFileToDirectory(selectedFile, selectedDirectory);
              if (result==1){

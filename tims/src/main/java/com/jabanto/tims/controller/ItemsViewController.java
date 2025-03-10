@@ -68,12 +68,12 @@ public class ItemsViewController {
 
     private void configureItemsSelectionTable() {
 
-        // Configurar el listener para la selección de la tabla
+        // Set up the listener for table selection
         tableItems.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Item>() {
             @Override
             public void changed(ObservableValue<? extends Item> observable, Item oldValue, Item newValue) {
                 if (newValue != null ) {
-                    // Actualizar los datos en el TextField y ComboBox
+                    // Update data into defined Java FXML elements
                     updateItemId = newValue.getId();
                     edit_name.setText(newValue.getItemName());
                     edit_group.setValue(newValue.getItemType().name());
@@ -81,7 +81,7 @@ public class ItemsViewController {
                     edit_status.setValue(newValue.getStatus().getName());
                     edit_remark.setText(newValue.getRemark());
                 } else {
-                    // Limpiar los datos si no hay ninguna fila seleccionada
+                    // clean data if any element is selected
                     updateItemId = 0;
                     edit_name.clear();
                     edit_category.setValue("Item Category");
@@ -92,11 +92,11 @@ public class ItemsViewController {
     }
 
     private void configureComboBoxSelection() {
-        // Agregar un ChangeListener al ComboBox
+        // Add ChangeListener to the ComboBox
         edit_group.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                // Aquí se ejecuta tu método cuando se selecciona un nuevo valor
+                // Start the methods when a object into the combo box is selected
                 tableItems.getItems().clear();
                 if (newValue != null){
                     loadItemsTable(newValue);
@@ -106,15 +106,15 @@ public class ItemsViewController {
 
         // Configure combo box selection by creating new keys
         new_group.valueProperty().addListener((observable, oldValue, newValue) -> {
-            // Lógica para establecer automáticamente el valor en el segundo ComboBox
+            // Logic to automatically set the value in the second ComboBox
             if ("KEYS".equals(newValue)) {
                 new_category.setValue("Storage");
-                new_category.setDisable(true); // Deshabilitar el ComboBox
+                new_category.setDisable(true); // deactivate the ComboBox
                 tableItems.getItems().clear();
                 loadItemsTable("KEYS");
             } else {
-                new_category.setValue(null); // Restablecer el valor si no es ninguna opción válida
-                new_category.setDisable(false); // Habilitar el ComboBox
+                new_category.setValue(null); // Reset the value if it is not a valid option
+                new_category.setDisable(false); // Enable the ComboBox
                 tableItems.getItems().clear();
                 loadItemsTable("ALL");
             }
@@ -176,8 +176,6 @@ public class ItemsViewController {
             remarkColumn.setCellValueFactory(new PropertyValueFactory<>("remark"));
         }
     }
-
-
 
 
     @FXML

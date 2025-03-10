@@ -88,23 +88,23 @@ public class UsersViewController {
 
     private void configureTableSelection(TableView table) {
 
-        // Configurar el listener para la selección de la tabla
+        // Set up the listener for table selection
         table.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<User>() {
             @Override
             public void changed(ObservableValue<? extends User> observable, User oldValue, User newValue) {
                 if (newValue != null) {
-                    // Actualizar los datos en el TextField y ComboBox
+                    // Update the TextField and ComboBox
                     updateUserId = newValue.getId();
                     edit_firstName.setText(newValue.getFirstName());
                     edit_lastName.setText(newValue.getLastName());
                     edit_email.setText(newValue.getEmail());
-                    // Configurar el ComboBox según el valor de getEnable()
+                    // Set up the selection value from getEnable()
                     edit_enable.setValue(newValue.getEnable()? "Yes" : "No");
                     edit_group_cb.setValue(newValue.getUserGroup().getGroupName());
                     edit_role_cb.setValue(newValue.getUserRole().getRoleName());
 
                     } else {
-                    // Limpiar los datos si no hay ninguna fila seleccionada
+                    // Clear the data if no row is selected
                     edit_firstName.clear();
                     edit_lastName.clear();
                     edit_email.clear();
@@ -129,10 +129,10 @@ public class UsersViewController {
             roleCollumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<User, String>, ObservableValue<String>>() {
                 @Override
                 public ObservableValue<String> call(TableColumn.CellDataFeatures<User, String> userStringCellData) {
-                    // userStringCellData.getValue() obtiene el objeto Usuario de la fila actual
-                    // getUserRole() obtiene la propiedad userRole de la clase Usuario
-                    // getValue() obtiene el objeto UserRole de la propiedad userRole
-                    // "role_name" obtiene la propiedad nombre de la clase UserRole
+                    // userStringCellData.getValue() gets the User object from the current row
+                    // getUserRole() gets the userRole property from the User class
+                    // getValue() gets the UserRole object from the userRole property
+                    // "role_name" gets the name property from the UserRole class
                     return Bindings.selectString(userStringCellData.getValue().getUserRole(), "roleName");
                 }
             });

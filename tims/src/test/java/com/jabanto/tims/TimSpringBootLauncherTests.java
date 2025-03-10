@@ -8,6 +8,8 @@ class TimSpringBootLauncherTests {
 
 	@Test
 	void contextLoads() {
+
+
 	}
 
 }

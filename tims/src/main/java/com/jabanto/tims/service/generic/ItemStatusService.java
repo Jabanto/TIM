@@ -1,9 +1,6 @@
 package com.jabanto.tims.service.generic;
 
-import com.jabanto.tims.configuration.StageInitializer;
-import com.jabanto.tims.dao.models.Category;
 import com.jabanto.tims.dao.models.Status;
-import com.jabanto.tims.dao.models.UserGroup;
 import com.jabanto.tims.dao.repositories.ItemStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

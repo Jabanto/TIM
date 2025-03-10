@@ -100,12 +100,6 @@
                         <Insets left="10" />
                     </HBox.margin>
                 </Label>
-                <Region HBox.hgrow="ALWAYS" />
-                <Label fx:id="current_date_label" styleClass="label-bottom" text="Date">
-                    <HBox.margin>
-                        <Insets right="10" />
-                    </HBox.margin>
-                </Label>
             </children>
         </HBox>
     </bottom>

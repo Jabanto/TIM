@@ -1,10 +1,10 @@
 package com.jabanto.tims.service.generic;
+
 import com.jabanto.tims.dao.models.Item;
 import com.jabanto.tims.dao.models.ItemType;
-import com.jabanto.tims.dao.models.User;
 import com.jabanto.tims.dao.repositories.ItemsRepository;
-import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -108,8 +108,6 @@ public class ItemService  {
         return itemNames;
 
     }
-
-
 
     public Item getItemByName(String name){
         Item item = itemRepository.findByItemName(name);

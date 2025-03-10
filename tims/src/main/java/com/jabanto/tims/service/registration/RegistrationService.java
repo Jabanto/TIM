@@ -1,9 +1,7 @@
 package com.jabanto.tims.service.registration;
-import com.jabanto.tims.configuration.StageInitializer;
+
 import com.jabanto.tims.dao.models.ConfirmationToken;
 import com.jabanto.tims.dao.models.User;
-import com.jabanto.tims.dao.models.UserGroup;
-import com.jabanto.tims.dao.models.UserRole;
 import com.jabanto.tims.service.generic.ConfirmationTokenService;
 import com.jabanto.tims.service.generic.UserService;
 import lombok.AllArgsConstructor;
@@ -15,7 +13,6 @@ import java.time.LocalDateTime;
 @Service
 @AllArgsConstructor
 public class RegistrationService {
-
 
     private final static String USER_EMAIL_NOT_VALID = "Email format is not valid.";
     private final static String USER_TOKEN_NOT_FOUND = "Token not found";

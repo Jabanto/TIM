@@ -1,6 +1,5 @@
 package com.jabanto.tims.dao.repositories;
 
-
 import com.jabanto.tims.dao.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
