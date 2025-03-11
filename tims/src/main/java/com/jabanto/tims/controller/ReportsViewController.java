@@ -32,10 +32,8 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static javafx.scene.control.Alert.AlertType.*;
 
@@ -67,7 +65,7 @@ public class ReportsViewController {
     private static final int PDF_CREATION_ERROR = 2;
     private static final int PDF_CREATION_EMPTY = 3;
     private static final String REPORT_TYPE_01_NAME ="Current Assignments Report" ;
-    private static final String REPORT_TYPE_02_NAME = " Historical Assignments Report" ;
+    private static final String REPORT_TYPE_02_NAME = "Historical Assignments Report" ;
     private static final String REPORT_TYPE_03_NAME = "Availability Tools Report" ;
 
     private static final int AVAILABLE = 7;
@@ -88,11 +86,11 @@ public class ReportsViewController {
 
     private void loadComboSelection() {
 
-        // Agregar un ChangeListener al ComboBox
+        // Add ChangeListener to ComboBox
         reportsSelection.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                // Aquí se ejecuta tu método cuando se selecciona un nuevo valor
+                // Execute a method when a new value is selected
                 if (newValue != null){
                     reportDescription.setText(reportsWithDescription.get(newValue));
                 }else {
@@ -171,7 +169,7 @@ public class ReportsViewController {
 
         try {
 
-            PdfWriter writer = new PdfWriter(outputPath+"/reportType01.pdf");
+            PdfWriter writer = new PdfWriter(getFullPath(outputPath, "reportType01_"));
             PdfDocument pdf = new PdfDocument(writer);
             Document document = new Document(pdf);
             // Create table
@@ -210,14 +208,14 @@ public class ReportsViewController {
 
         try {
 
-            PdfWriter writer = new PdfWriter(outputPath+"/reportType02.pdf");
+            PdfWriter writer = new PdfWriter(getFullPath(outputPath, "reportType02_"));
             PdfDocument pdf = new PdfDocument(writer);
             Document document = new Document(pdf);
             // Create table
             Paragraph documentTitle = setTitle(reportType02);
             document.add(documentTitle);
 
-            Table table = new Table(4); // 4 columns for userName, toolName, assignmentDate, returnDate, dispense from
+            Table table = new Table(5); // 5 columns for Tool, toolName, assign to, dispense from, dispense date and check in date
 
             // add columns headers
             table.addHeaderCell("Tool Name");
@@ -247,6 +245,17 @@ public class ReportsViewController {
         }
     }
 
+    private String getFullPath(String outputPath, String fileType) {
+        // Format date and time
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        String fechaHora = dateFormat.format(new Date());
+
+        // create name with date and time
+        String fileName = fileType + fechaHora + ".pdf";
+        String fullPath = outputPath + "/" + fileName;
+        return fullPath;
+    }
+
 
     public int generatePdf_Type03(List<Item> items, String outputPath) {
 
@@ -257,7 +266,7 @@ public class ReportsViewController {
         else {
             try {
 
-                PdfWriter writer = new PdfWriter(outputPath + "/reportType03.pdf");
+                PdfWriter writer = new PdfWriter(getFullPath(outputPath, "reportType03_"));
                 PdfDocument pdf = new PdfDocument(writer);
                 Document document = new Document(pdf);
                 // Create table
